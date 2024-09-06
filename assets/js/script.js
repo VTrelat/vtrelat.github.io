@@ -59,11 +59,36 @@ const plane = new THREE.Plane();
 const mousePosition = new THREE.Vector2();
 const raycaster = new THREE.Raycaster();
 
+// get the mouse position on the canvas
 window.addEventListener('mousemove', (event) => {
   const canvasX = document.getElementById('3d-model-container').getBoundingClientRect().left + document.getElementById('3d-model-container').getBoundingClientRect().width / 2;
   const canvasY = document.getElementById('3d-model-container').getBoundingClientRect().top + document.getElementById('3d-model-container').getBoundingClientRect().height / 2;
   mousePosition.x = (event.clientX / window.innerWidth) * 2 - 2*canvasX/ window.innerWidth;
   mousePosition.y = -(event.clientY / window.innerHeight) * 2 + 2*canvasY / window.innerHeight;
+  planeNormal.copy(camera.position).normalize();
+  plane.setFromNormalAndCoplanarPoint(planeNormal, scene.position);
+  raycaster.setFromCamera(mousePosition, camera);
+  raycaster.ray.intersectPlane(plane, intersectionPoint);
+  target.position.set(intersectionPoint.x, intersectionPoint.y, 2);
+});
+
+// for mobile devices: get the touch position on the canvas
+window.addEventListener('touchmove', (event) => {
+  const canvasX = document.getElementById('3d-model-container').getBoundingClientRect().left + document.getElementById('3d-model-container').getBoundingClientRect().width / 2;
+  const canvasY = document.getElementById('3d-model-container').getBoundingClientRect().top + document.getElementById('3d-model-container').getBoundingClientRect().height / 2;
+  mousePosition.x = (event.touches[0].clientX / window.innerWidth) * 2 - 2*canvasX/ window.innerWidth;
+  mousePosition.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 2*canvasY / window.innerHeight;
+  planeNormal.copy(camera.position).normalize();
+  plane.setFromNormalAndCoplanarPoint(planeNormal, scene.position);
+  raycaster.setFromCamera(mousePosition, camera);
+  raycaster.ray.intersectPlane(plane, intersectionPoint);
+  target.position.set(intersectionPoint.x, intersectionPoint.y, 2);
+});
+window.addEventListener('touchstart', (event) => {
+  const canvasX = document.getElementById('3d-model-container').getBoundingClientRect().left + document.getElementById('3d-model-container').getBoundingClientRect().width / 2;
+  const canvasY = document.getElementById('3d-model-container').getBoundingClientRect().top + document.getElementById('3d-model-container').getBoundingClientRect().height / 2;
+  mousePosition.x = (event.touches[0].clientX / window.innerWidth) * 2 - 2*canvasX/ window.innerWidth;
+  mousePosition.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 2*canvasY / window.innerHeight;
   planeNormal.copy(camera.position).normalize();
   plane.setFromNormalAndCoplanarPoint(planeNormal, scene.position);
   raycaster.setFromCamera(mousePosition, camera);
@@ -107,7 +132,6 @@ window.addEventListener('resize', () => {
 });
 
 function animate() {
-
   if (head) {
     head.lookAt(target.position);
   }
