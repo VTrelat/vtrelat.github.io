@@ -80,7 +80,7 @@ tabs.forEach((tab) => {
 const sections = document.querySelectorAll("section[id]");
 
 function scrollActive() {
-    const scrollY = window.pageYOffset;
+    const scrollY = window.scrollY;
 
     sections.forEach((current) => {
         const sectionHeight = current.offsetHeight,
@@ -116,3 +116,5 @@ function scrollUp() {
 window.addEventListener("scroll", scrollUp);
 
 /*==================== DARK LIGHT THEME ====================*/
+
+/*====================== 3D CHARACTER ======================*/
