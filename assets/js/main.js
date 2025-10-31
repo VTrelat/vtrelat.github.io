@@ -148,24 +148,26 @@ var _global = "undefined" != typeof window ? window : "undefined" != typeof glob
 		const card = document.createElement('article');
 		card.className = 'project-card';
 
+		// --- Social preview (Open Graph) ---
 		const coverLink = document.createElement('a');
 		coverLink.href = repo.html_url;
 		coverLink.target = '_blank';
 		coverLink.rel = 'noopener';
 		coverLink.className = 'project-card__cover';
 
-		// Try user-provided cover first, fallback to GitHub OpenGraph (cache-busted)
-		const ogUrl = `https://opengraph.githubassets.com/${Date.now()}/${repo.full_name}`;
-		const src = covers[repo.full_name] || ogUrl;
-
+		const ogUrl = `https://opengraph.githubassets.com/1/${repo.full_name}`;
 		const img = document.createElement('img');
-		img.src = src;
+		img.src = ogUrl;
 		img.alt = `Social preview for ${repo.full_name}`;
 		img.loading = 'lazy';
 		img.decoding = 'async';
-		img.width = 1200;
+		img.width = 1200;   // dimensions intrinsèques pour la stabilité de layout
 		img.height = 630;
-		img.addEventListener('error', () => coverLink.remove());
+
+		// En cas d’échec réseau, on retire la cover pour ne pas afficher un “trou”
+		img.addEventListener('error', () => {
+			coverLink.remove();
+		});
 
 		coverLink.appendChild(img);
 		card.appendChild(coverLink);
