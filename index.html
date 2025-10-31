@@ -29,23 +29,28 @@
             </a>
           </li>
           <li class="nav__item">
+            <a href="#projects" class="nav__link">
+              <i class="uil uil-bookmark nav__icon"></i> Pinned projects
+            </a>
+          </li>
+          <li class="nav__item">
             <a href="#about" class="nav__link">
               <i class="uil uil-user nav__icon"></i> About
             </a>
           </li>
-          <li class="nav__item">
+          <!-- <li class="nav__item">
             <a href="#skills" class="nav__link">
               <i class="uil uil-processor nav__icon"></i> Skills
+            </a>
+          </li> -->
+          <li class="nav__item">
+            <a href="#publications" class="nav__link">
+              <i class="uil uil-file-alt nav__icon"></i> Publications
             </a>
           </li>
           <li class="nav__item">
             <a href="#qualification" class="nav__link">
               <i class="uil uil-file-alt nav__icon"></i> Qualifications
-            </a>
-          </li>
-          <li class="nav__item">
-            <a href="#publications" class="nav__link">
-              <i class="uil uil-file-alt nav__icon"></i> Publications
             </a>
           </li>
           <li class="nav__item">
@@ -69,7 +74,7 @@
   <main class="main">
     <!--==================== HOME ====================-->
     <div id="progress-container">
-      <div id="progress">Loading 3D model...</div>
+      <!-- <div id="progress">Loading 3D model...</div> -->
     </div>
     <section class="home section" id="home">
       <div class="home__container container grid">
@@ -133,12 +138,35 @@
           </div>
         </div>
 
-        <div class="home__scroll">
+        <!-- <div class="home__scroll">
           <a href="#about" class="home__scroll-button button--flex">
             <i class="uil uil-mouse-alt home__scroll-mouse"></i>
             <span class="home__scroll-name">Scroll down</span>
             <i class="uil uil-arrow-down home__scroll-arrow"></i>
           </a>
+        </div> -->
+      </div>
+    </section>
+
+    <!--==================== PROJECTS ====================-->
+    <section class="projects section" id="projects">
+      <h2 class="section__title">Pinned Projects</h2>
+      <span class="section__subtitle">Selected GitHub repositories</span>
+
+      <div class="projects__container container">
+        <!-- Définissez ici la liste des dépôts "pinés" (owner/name, séparés par des virgules) -->
+        <div class="project-grid" id="project-grid" data-repos="VTrelat/BEer, VTrelat/ZFLean">
+          <!-- Les cartes sont injectées par JS -->
+          <noscript>
+            <p>Enable JavaScript to load projects.</p>
+            <ul>
+              <li>
+                <a href="https://github.com/VTrelat/vtrelat.github.io" target="_blank" rel="noopener">
+                  vtrelat.github.io
+                </a>
+              </li>
+            </ul>
+          </noscript>
         </div>
       </div>
     </section>
@@ -149,7 +177,7 @@
       <span class="section__subtitle">My introduction</span>
 
       <div class="about__container grid">
-        <img src="assets/img/about.jpg" alt="" class="about__img" />
+        <img src="assets/img/about.png" class="about__img" />
         <div class="about__data">
           <p class="about__description">
             I am a computer science engineer and graduated from the École des
@@ -266,7 +294,7 @@
     </section>
 
     <!--==================== SKILLS ====================-->
-    <section class="skills section" id="skills">
+    <section class="skills section" id="skills" style="display: none">
       <h2 class="section__title">Skills</h2>
       <span class="section__subtitle">My technical level</span>
 
@@ -565,16 +593,16 @@
     </section>
 
     <!--==================== CYCLING ====================-->
-    <section class="cycling section" id="about">
+    <section class="cycling section" id="cycling">
       <h2 class="section__title">Cycling</h2>
       <span class="section__subtitle">Some of my cycling activities</span>
       <div class="strava-container">
         <div class="strava-activity">
-          <div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="14039662135"
+          <div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="15967387662"
             data-style="standard"></div>
-          <!-- <div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="12467913614"
-            data-style="standard"></div> -->
-          <div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="12051837902"
+          <div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="15558974281"
+            data-style="standard"></div>
+          <div class="strava-embed-placeholder" data-embed-type="activity" data-embed-id="14344412842"
             data-style="standard"></div>
         </div>
       </div>
@@ -617,7 +645,7 @@
                 vincent.trelat@inria.fr
               </a>
               <br />
-              <a id="contact__email" href="mailto:vincent.trelat@inria.fr">
+              <a id="contact__email" href="mailto:vincent.trelat@depinfonancy.net">
                 vincent.trelat@depinfonancy.net
               </a>
             </span>
