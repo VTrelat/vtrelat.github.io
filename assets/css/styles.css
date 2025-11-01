@@ -331,7 +331,6 @@ img {
   width: min(70vw, 240px);
   height: auto;
   display: block;
-  filter: drop-shadow(0 1.25rem 2.5rem rgba(10, 10, 10, 0.18));
   overflow: visible;
 }
 
