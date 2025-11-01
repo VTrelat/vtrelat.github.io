@@ -116,6 +116,74 @@ function scrollUp() {
 window.addEventListener("scroll", scrollUp);
 
 /*==================== DARK LIGHT THEME ====================*/
+const themeButton = document.getElementById("theme-button");
+const themeButtonIcon = themeButton ? themeButton.querySelector("i") : null;
+const darkTheme = "dark-theme";
+
+const prefersDarkScheme = window.matchMedia
+        ? window.matchMedia("(prefers-color-scheme: dark)")
+        : null;
+
+let savedTheme = null;
+try {
+        savedTheme = localStorage.getItem("selected-theme");
+} catch (error) {
+        savedTheme = null;
+}
+
+const applyTheme = (theme) => {
+        if (theme === "dark") {
+                document.body.classList.add(darkTheme);
+        } else {
+                document.body.classList.remove(darkTheme);
+        }
+};
+
+const updateThemeButton = () => {
+        if (!themeButton || !themeButtonIcon) return;
+        const isDark = document.body.classList.contains(darkTheme);
+        themeButtonIcon.classList.remove("uil-moon", "uil-sun");
+        themeButtonIcon.classList.add(isDark ? "uil-sun" : "uil-moon");
+        themeButton.setAttribute(
+                "aria-label",
+                isDark ? "Switch to light theme" : "Switch to dark theme"
+        );
+        themeButton.setAttribute("aria-pressed", isDark ? "true" : "false");
+};
+
+const initialTheme =
+        savedTheme || (prefersDarkScheme && prefersDarkScheme.matches ? "dark" : "light");
+applyTheme(initialTheme);
+updateThemeButton();
+
+if (prefersDarkScheme) {
+        const handleSchemeChange = (event) => {
+                if (savedTheme) return;
+                applyTheme(event.matches ? "dark" : "light");
+                updateThemeButton();
+        };
+
+        if (typeof prefersDarkScheme.addEventListener === "function") {
+                prefersDarkScheme.addEventListener("change", handleSchemeChange);
+        } else if (typeof prefersDarkScheme.addListener === "function") {
+                prefersDarkScheme.addListener(handleSchemeChange);
+        }
+}
+
+if (themeButton) {
+        themeButton.addEventListener("click", () => {
+                const newTheme = document.body.classList.toggle(darkTheme)
+                        ? "dark"
+                        : "light";
+                updateThemeButton();
+                try {
+                        localStorage.setItem("selected-theme", newTheme);
+                        savedTheme = newTheme;
+                } catch (error) {
+                        savedTheme = newTheme;
+                }
+        });
+}
 
 /*====================== 3D CHARACTER ======================*/
 !function () {
