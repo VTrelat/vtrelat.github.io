@@ -321,13 +321,21 @@ img {
   color: var(--first-color-alt);
 }
 
-.home__blob {
-  width: 200px;
-  fill: var(--first-color-lighter);
+.home__img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.home__blob-img {
-  width: 200px;
+.home__blob {
+  width: min(70vw, 240px);
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.home__blob path {
+  fill: var(--first-color-lighter);
 }
 
 .home__data {
@@ -816,7 +824,7 @@ img {
   }
 
   .home__blob {
-    width: 200px;
+    width: clamp(200px, 58vw, 260px);
   }
 
   .skills__title {
@@ -858,7 +866,7 @@ img {
   }
 
   .home__blob {
-    width: 250px;
+    width: clamp(240px, 34vw, 320px);
   }
 
   .about__container,
@@ -940,7 +948,7 @@ img {
   }
 
   .home__blob {
-    width: 270px;
+    width: clamp(280px, 30vw, 360px);
   }
 
   .home__scroll {
@@ -1014,7 +1022,7 @@ img {
   }
 
   .home__blob {
-    width: 320px;
+    width: clamp(320px, 28vw, 420px);
   }
 
   .home__social {
@@ -1024,20 +1032,6 @@ img {
   .publications__content {
     width: 60%;
   }
-}
-
-#progress-container {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#progress {
-  font-size: 3em;
-  color: var(--first-color);
 }
 
 /*==================== PROJECTS ====================*/
