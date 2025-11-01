@@ -62,7 +62,14 @@
         <i class="uil uil-times nav__close" id="nav-close"></i>
       </div>
       <div class="nav__btns">
-        <!-- <i class="uil uil-moon change-theme" id="theme-button"></i> -->
+        <button
+          type="button"
+          class="change-theme"
+          id="theme-button"
+          aria-label="Switch to dark theme"
+        >
+          <i class="uil uil-moon" aria-hidden="true"></i>
+        </button>
         <div class="nav__toggle" id="nav-toggle">
           <i class="uil uil-apps"></i>
         </div>
@@ -73,9 +80,6 @@
   <!--==================== MAIN ====================-->
   <main class="main">
     <!--==================== HOME ====================-->
-    <div id="progress-container">
-      <!-- <div id="progress">Loading 3D model...</div> -->
-    </div>
     <section class="home section" id="home">
       <div class="home__container container grid">
         <div class="home__content grid">
@@ -120,8 +124,32 @@
               </svg>
             </div> -->
           <div class="home__img">
-            <!-- Remplacer le SVG par un div pour le canvas -->
-            <div id="3d-model-container"></div>
+            <svg
+              class="home__blob"
+              viewBox="0 0 200 187"
+              role="img"
+              aria-labelledby="home-portrait-title"
+            >
+              <title id="home-portrait-title">Portrait of Vincent Trélat</title>
+              <defs>
+                <clipPath id="home-blob-clip">
+                  <path
+                    d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"
+                  />
+                </clipPath>
+              </defs>
+              <path
+                d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"
+              />
+              <image
+                class="home__blob-img"
+                href="assets/img/profile.png"
+                width="200"
+                height="187"
+                clip-path="url(#home-blob-clip)"
+                preserveAspectRatio="xMidYMid slice"
+              />
+            </svg>
           </div>
 
           <div class="home__data">
@@ -667,16 +695,6 @@
 
   <!--==================== MAIN JS ====================-->
   <script src="assets/js/main.js"></script>
-  <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
-  <script type="importmap">
-      {
-        "imports": {
-          "three": "https://unpkg.com/three@v0.163.0/build/three.module.js",
-          "three/addons/": "https://unpkg.com/three@v0.163.0/examples/jsm/"
-        }
-      }
-    </script>
-  <script type="module" src="assets/js/script.js"></script>
 </body>
 
 </html>

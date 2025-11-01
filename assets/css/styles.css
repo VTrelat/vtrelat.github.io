@@ -71,6 +71,20 @@
 
 /*========== Variables Dark theme ==========*/
 
+body.dark-theme {
+  --first-color: hsl(var(--hue-color), 45%, 65%);
+  --first-color-second: hsl(var(--hue-color), 45%, 65%);
+  --first-color-alt: hsl(var(--hue-color), 45%, 55%);
+  --first-color-lighter: hsl(var(--hue-color), 45%, 85%);
+  --title-color: hsl(var(--hue-color), 60%, 90%);
+  --text-color: hsl(var(--hue-color), 20%, 75%);
+  --text-color-light: hsl(var(--hue-color), 20%, 60%);
+  --input-color: hsl(var(--hue-color), 29%, 16%);
+  --body-color: hsl(var(--hue-color), 28%, 12%);
+  --container-color: hsl(var(--hue-color), 29%, 16%);
+  --scroll-bar-color: hsl(var(--hue-color), 12%, 48%);
+  --scroll-thumb-color: hsl(var(--hue-color), 12%, 36%);
+}
 
 /*========== Button Dark/Light ==========*/
 
@@ -170,6 +184,38 @@ img {
 .nav__toggle {
   color: var(--title-color);
   font-weight: var(--font-medium);
+}
+
+.nav__btns {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+}
+
+.change-theme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--title-color);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.change-theme:hover {
+  color: var(--first-color);
+  background-color: var(--first-color-lighter);
+}
+
+.change-theme:focus-visible {
+  color: var(--first-color);
+  background-color: var(--first-color-lighter);
+  outline: 2px solid var(--first-color);
+  outline-offset: 2px;
 }
 
 .nav__logo:hover {
@@ -275,13 +321,21 @@ img {
   color: var(--first-color-alt);
 }
 
-.home__blob {
-  width: 200px;
-  fill: var(--first-color-lighter);
+.home__img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.home__blob-img {
-  width: 200px;
+.home__blob {
+  width: min(70vw, 240px);
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.home__blob path {
+  fill: var(--first-color-lighter);
 }
 
 .home__data {
@@ -770,7 +824,7 @@ img {
   }
 
   .home__blob {
-    width: 200px;
+    width: clamp(200px, 58vw, 260px);
   }
 
   .skills__title {
@@ -812,7 +866,7 @@ img {
   }
 
   .home__blob {
-    width: 250px;
+    width: clamp(240px, 34vw, 320px);
   }
 
   .about__container,
@@ -894,7 +948,7 @@ img {
   }
 
   .home__blob {
-    width: 270px;
+    width: clamp(280px, 30vw, 360px);
   }
 
   .home__scroll {
@@ -968,7 +1022,7 @@ img {
   }
 
   .home__blob {
-    width: 320px;
+    width: clamp(320px, 28vw, 420px);
   }
 
   .home__social {
@@ -978,20 +1032,6 @@ img {
   .publications__content {
     width: 60%;
   }
-}
-
-#progress-container {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#progress {
-  font-size: 3em;
-  color: var(--first-color);
 }
 
 /*==================== PROJECTS ====================*/
