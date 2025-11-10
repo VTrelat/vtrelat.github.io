@@ -1037,9 +1037,14 @@ img {
 /*==================== PROJECTS ====================*/
 .projects .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
   align-items: stretch;
+}
+.projects__container.container {
+  max-width: 1200px;
+  padding-left: clamp(1rem, 4vw, 3rem);
+  padding-right: clamp(1rem, 4vw, 3rem);
 }
 
 .project-card {
@@ -1051,12 +1056,21 @@ img {
   display: flex;
   flex-direction: column;
   min-height: 180px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 18px 32px rgba(0,0,0,.12);
 }
 
 .project-card__title {
   font-size: var(--h3-font-size);
   margin: 0 0 .25rem 0;
-  color: var(--title-color);
+  color: var(--text-color);
+}
+.project-card__title a {
+  color: var(--text-color);
 }
 
 .project-card__desc {
@@ -1072,10 +1086,6 @@ img {
   font-size: var(--smaller-font-size);
   color: var(--text-color);
   margin-top: auto; /* pousse les meta en bas de carte */
-}
-
-.project-card__actions { 
-  margin-top: .75rem; 
 }
 
 .project-card a { 
