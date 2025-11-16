@@ -196,6 +196,42 @@ if (themeButton) {
 	});
 }
 
+/*==================== TALKS FILTER ====================*/
+const talkFilterButtons = document.querySelectorAll(".talks__filter");
+const talkCards = document.querySelectorAll(".talks__card");
+
+const applyTalkFilters = () => {
+	if (!talkCards.length) return;
+	const activeFilters = Array.from(talkFilterButtons)
+		.filter((button) => button.classList.contains("is-active"))
+		.map((button) => button.dataset.tag);
+
+	talkCards.forEach((card) => {
+		const tags = (card.dataset.tags || "")
+			.split(/\s+/)
+			.filter(Boolean);
+		const shouldShow =
+			activeFilters.length === 0 ||
+			tags.some((tag) => activeFilters.includes(tag));
+
+		card.classList.toggle("is-hidden", !shouldShow);
+	});
+};
+
+if (talkFilterButtons.length) {
+	talkFilterButtons.forEach((button) => {
+		button.addEventListener("click", () => {
+			button.classList.toggle("is-active");
+			button.setAttribute(
+				"aria-pressed",
+				button.classList.contains("is-active") ? "true" : "false"
+			);
+			applyTalkFilters();
+		});
+	});
+	applyTalkFilters();
+}
+
 /*====================== 3D CHARACTER ======================*/
 
 !function () {
