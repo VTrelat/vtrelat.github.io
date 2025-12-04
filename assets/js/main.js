@@ -258,6 +258,7 @@ var _global = "undefined" != typeof window ? window : "undefined" != typeof glob
 
 	const covers = {
 		'VTrelat/BEer': 'assets/img/BEer_og.jpg',
+		'VTrelat/BARReL': 'assets/img/BARReL_og.jpg',
 		'VTrelat/ZFLean': 'assets/img/ZFLean_og.png',
 		'VTrelat/noctis-lux-theme': 'assets/img/noctis_og.png'
 	};
