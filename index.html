@@ -349,33 +349,52 @@
       <h2 class="section__title">Invited talks</h2>
       <span class="section__subtitle">Selected presentations</span>
       <div class="talks__filters" role="group" aria-label="Filter talks by format">
-        <button type="button" class="talks__filter talks__filter--seminar is-active" data-tag="seminar"
-          aria-pressed="true">
+        <button type="button" class="talks__filter talks__filter--seminar" data-tag="seminar" aria-pressed="false">
           Seminars
         </button>
-        <button type="button" class="talks__filter talks__filter--workshop is-active" data-tag="workshop"
-          aria-pressed="true">
+        <button type="button" class="talks__filter talks__filter--workshop" data-tag="workshop" aria-pressed="false">
           Workshops
         </button>
-        <button type="button" class="talks__filter talks__filter--conference is-active" data-tag="conference"
-          aria-pressed="true">
+        <button type="button" class="talks__filter talks__filter--conference" data-tag="conference"
+          aria-pressed="false">
           Conferences
         </button>
-        <button type="button" class="talks__filter talks__filter--symposium is-active" data-tag="symposium"
-          aria-pressed="true">
+        <button type="button" class="talks__filter talks__filter--symposium" data-tag="symposium" aria-pressed="false">
           Symposiums
         </button>
-        <button type="button" class="talks__filter talks__filter--award is-active" data-tag="award" aria-pressed="true">
+        <button type="button" class="talks__filter talks__filter--award" data-tag="award" aria-pressed="false">
           Awards
         </button>
       </div>
       <div class="talks__container">
+        <article class="talks__card" data-tags="seminar">
+          <div class="talks__header">
+            <h3 class="talks__title">
+              From Sets to Types: using the B Method with modern proof tools
+            </h3>
+            <span class="talks__venue">UFMG, Belo Horizonte, Brazil, 5 Feb 2026</span>
+          </div>
+          <!-- <p class="talks__description">
+            Invited seminar at DCC/UFMG on February 5, 2026.
+          </p> -->
+          <div class="talks__meta">
+            <span class="talks__tag talks__tag--seminar" data-label="Seminar" aria-label="Seminar"></span>
+            <a href="https://dcc.ufmg.br/palestra-from-sets-to-types-using-the-b-method-with-modern-proof-tools/"
+              target="_blank" rel="noopener" class="talks__link">
+              Event page <i class="uil uil-external-link-alt"></i>
+            </a>
+            <a href="./slides/ufmg2026.pdf" download target="_blank" rel="noopener" class="talks__link">
+              Slides <i class="uil uil-files-landscapes"></i>
+            </a>
+          </div>
+        </article>
+
         <article class="talks__card" data-tags="conference">
           <div class="talks__header">
             <h3 class="talks__title">
               iFM: Brewing the Soundness of BEer
             </h3>
-            <span class="talks__venue">Paris, 2025</span>
+            <span class="talks__venue">Paris, France, 2025</span>
           </div>
           <!-- <p class="talks__description" /> -->
           <div class="talks__meta">
@@ -391,7 +410,7 @@
             <h3 class="talks__title">
               Journée du GT LVP du GdR GPL
             </h3>
-            <span class="talks__venue">Paris, 2025</span>
+            <span class="talks__venue">Paris, France, 2025</span>
           </div>
           <!-- <p class="talks__description" /> -->
           <div class="talks__meta">
@@ -407,7 +426,7 @@
             <h3 class="talks__title">
               EuroProofNet: Workshop on Automated Reasoning and Proof Logging
             </h3>
-            <span class="talks__venue">Orsay, Paris, 2025</span>
+            <span class="talks__venue">Paris, France, 2025</span>
           </div>
           <!-- <p class="talks__description" /> -->
           <div class="talks__meta">
@@ -427,7 +446,7 @@
             <h3 class="talks__title">
               BLaSST Meeting
             </h3>
-            <span class="talks__venue">Clearsy, Paris, 2025</span>
+            <span class="talks__venue">Clearsy, Paris, France, 2025</span>
           </div>
           <!-- <p class="talks__description" /> -->
           <div class="talks__meta">
@@ -445,7 +464,7 @@
         <article class="talks__card" data-tags="conference award">
           <div class="talks__header">
             <h3 class="talks__title">ABZ: Safely Encoding B Proof Obligations in SMT-LIB</h3>
-            <span class="talks__venue">Düsseldorf, 2025</span>
+            <span class="talks__venue">Düsseldorf, Germany, 2025</span>
           </div>
           <!-- <p class="talks__description" /> -->
           <div class="talks__meta">
@@ -462,7 +481,7 @@
             <h3 class="talks__title">
               ICSPA Meeting
             </h3>
-            <span class="talks__venue">Paris, 2025</span>
+            <span class="talks__venue">Paris, France, 2025</span>
           </div>
           <!-- <p class="talks__description">
             Invited talk by Catherine Dubois at the annual meeting of the ICSPA ANR project.
@@ -484,7 +503,7 @@
             <h3 class="talks__title">
               Journée du GT LVP du GdR GPL
             </h3>
-            <span class="talks__venue">Paris, 2024</span>
+            <span class="talks__venue">Paris, France, 2024</span>
           </div>
           <!-- <p class="talks__description">
             Annual meeting of the Logic and Verification of Programs working group,
@@ -528,7 +547,7 @@
             <h3 class="talks__title">
               VeriDis Retreat
             </h3>
-            <span class="talks__venue">Liège, 2024</span>
+            <span class="talks__venue">Liège, Belgium, 2024</span>
           </div>
           <!-- <p class="talks__description">
             Annual retreat of the VeriDis research team, split between Inria Nancy, the University of Liège and the
@@ -547,7 +566,7 @@
             <h3 class="talks__title">
               AFADL: Enhancing B Language Reasoners with SMT Techniques
             </h3>
-            <span class="talks__venue">Strasbourg, 2024</span>
+            <span class="talks__venue">Strasbourg, France, 2024</span>
           </div>
           <!-- <p class="talks__description" /> -->
           <div class="talks__meta">
@@ -561,7 +580,7 @@
         <article class="talks__card" data-tags="seminar">
           <div class="talks__header">
             <h3 class="talks__title">BLaSST Meeting</h3>
-            <span class="talks__venue">Clearsy, Paris, 2024</span>
+            <span class="talks__venue">Clearsy, Paris, France, 2024</span>
           </div>
           <!-- <p class="talks__description" /> -->
           <div class="talks__meta">

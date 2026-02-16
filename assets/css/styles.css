@@ -818,6 +818,9 @@ body.dark-theme .talks__filter {
   border-radius: .75rem;
   padding: 1.25rem 1.5rem;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .talks__header {
@@ -851,6 +854,7 @@ body.dark-theme .talks__filter {
   justify-content: space-between;
   align-items: center;
   row-gap: .5rem;
+  margin-top: auto;
 }
 
 .talks__tag {
