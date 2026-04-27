@@ -730,6 +730,7 @@ img {
   gap: 1.5rem;
 }
 
+.publications__filters,
 .talks__filters {
   width: 80%;
   margin: 1rem auto 2rem;
@@ -739,10 +740,11 @@ img {
   gap: .75rem;
 }
 
+.publications__filter,
 .talks__filter {
   border: 1px solid var(--first-color-lighter);
-  background-color: var(--talk-filter-inactive-bg, var(--container-color));
-  color: var(--talk-filter-inactive-color, var(--title-color));
+  background-color: var(--filter-inactive-bg, var(--talk-filter-inactive-bg, var(--container-color)));
+  color: var(--filter-inactive-color, var(--talk-filter-inactive-color, var(--title-color)));
   font-size: var(--small-font-size);
   font-weight: var(--font-semi-bold);
   padding: .4rem 1rem;
@@ -754,18 +756,52 @@ img {
   opacity: .65;
 }
 
+.publications__filter.is-active,
 .talks__filter.is-active {
-  background-color: var(--talk-filter-active-bg, var(--first-color-lighter));
-  color: var(--talk-filter-active-color, var(--container-color));
-  border-color: var(--talk-filter-active-border, var(--first-color));
+  background-color: var(--filter-active-bg, var(--talk-filter-active-bg, var(--first-color-lighter)));
+  color: var(--filter-active-color, var(--talk-filter-active-color, var(--container-color)));
+  border-color: var(--filter-active-border, var(--talk-filter-active-border, var(--first-color)));
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
   transform: translateY(-2px);
   opacity: 1;
 }
 
+body.dark-theme .publications__filter,
 body.dark-theme .talks__filter {
   border-color: rgba(255, 255, 255, 0.08);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.publications__filter--preprint {
+  --filter-active-bg: rgba(15, 118, 110, 0.6);
+  --filter-active-color: #ecfdf5;
+  --filter-active-border: #0d9488;
+  --filter-inactive-bg: rgba(13, 148, 136, 0.12);
+  --filter-inactive-color: #0f766e;
+}
+
+.publications__filter--conference {
+  --filter-active-bg: rgba(109, 40, 217, 0.6);
+  --filter-active-color: #f5ebff;
+  --filter-active-border: #7c3aed;
+  --filter-inactive-bg: rgba(124, 58, 237, 0.15);
+  --filter-inactive-color: rgb(109, 40, 217);
+}
+
+.publications__filter--isabelle {
+  --filter-active-bg: rgba(250, 204, 21, 0.6);
+  --filter-active-color: #fff7db;
+  --filter-active-border: #fbbf24;
+  --filter-inactive-bg: rgba(250, 204, 21, 0.3);
+  --filter-inactive-color: #a16207;
+}
+
+.publications__filter--lean {
+  --filter-active-bg: rgba(29, 78, 216, 0.6);
+  --filter-active-color: #e0edff;
+  --filter-active-border: #2563eb;
+  --filter-inactive-bg: rgba(37, 99, 235, 0.15);
+  --filter-inactive-color: #1d4ed8;
 }
 
 .talks__filter--seminar {
@@ -808,6 +844,7 @@ body.dark-theme .talks__filter {
   --talk-filter-inactive-color: #a16207;
 }
 
+.publications__data.is-hidden,
 .talks__card.is-hidden {
   display: none;
 }

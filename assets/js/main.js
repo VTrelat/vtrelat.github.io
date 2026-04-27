@@ -196,41 +196,46 @@ if (themeButton) {
 	});
 }
 
-/*==================== TALKS FILTER ====================*/
-const talkFilterButtons = document.querySelectorAll(".talks__filter");
-const talkCards = document.querySelectorAll(".talks__card");
+/*==================== TAG FILTERS ====================*/
+const setupTagFilters = (filterSelector, itemSelector) => {
+	const filterButtons = document.querySelectorAll(filterSelector);
+	const items = document.querySelectorAll(itemSelector);
 
-const applyTalkFilters = () => {
-	if (!talkCards.length) return;
-	const activeFilters = Array.from(talkFilterButtons)
-		.filter((button) => button.classList.contains("is-active"))
-		.map((button) => button.dataset.tag);
+	const applyFilters = () => {
+		if (!items.length) return;
+		const activeFilters = Array.from(filterButtons)
+			.filter((button) => button.classList.contains("is-active"))
+			.map((button) => button.dataset.tag);
 
-	talkCards.forEach((card) => {
-		const tags = (card.dataset.tags || "")
-			.split(/\s+/)
-			.filter(Boolean);
-		const shouldShow =
-			activeFilters.length === 0 ||
-			tags.some((tag) => activeFilters.includes(tag));
+		items.forEach((item) => {
+			const tags = (item.dataset.tags || "")
+				.split(/\s+/)
+				.filter(Boolean);
+			const shouldShow =
+				activeFilters.length === 0 ||
+				tags.some((tag) => activeFilters.includes(tag));
 
-		card.classList.toggle("is-hidden", !shouldShow);
-	});
+			item.classList.toggle("is-hidden", !shouldShow);
+		});
+	};
+
+	if (filterButtons.length) {
+		filterButtons.forEach((button) => {
+			button.addEventListener("click", () => {
+				button.classList.toggle("is-active");
+				button.setAttribute(
+					"aria-pressed",
+					button.classList.contains("is-active") ? "true" : "false"
+				);
+				applyFilters();
+			});
+		});
+		applyFilters();
+	}
 };
 
-if (talkFilterButtons.length) {
-	talkFilterButtons.forEach((button) => {
-		button.addEventListener("click", () => {
-			button.classList.toggle("is-active");
-			button.setAttribute(
-				"aria-pressed",
-				button.classList.contains("is-active") ? "true" : "false"
-			);
-			applyTalkFilters();
-		});
-	});
-	applyTalkFilters();
-}
+setupTagFilters(".publications__filter", ".publications__data");
+setupTagFilters(".talks__filter", ".talks__card");
 
 /*====================== 3D CHARACTER ======================*/
 

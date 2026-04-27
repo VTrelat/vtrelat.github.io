@@ -266,38 +266,56 @@
     <!--==================== PUBLICATIONS ====================-->
     <section class="publications section" id="publications">
       <h2 class="section__title">Publications</h2>
-      <span class="section__subtitle"></span>
+      <span class="section__subtitle">Selected papers, preprints, and formalizations</span>
+      <div class="publications__filters" role="group" aria-label="Filter publications by type">
+        <button type="button" class="publications__filter publications__filter--preprint" data-tag="preprint"
+          aria-pressed="false">
+          Preprints
+        </button>
+        <button type="button" class="publications__filter publications__filter--conference" data-tag="conference"
+          aria-pressed="false">
+          Conference
+        </button>
+        <button type="button" class="publications__filter publications__filter--isabelle" data-tag="isabelle"
+          aria-pressed="false">
+          Isabelle
+        </button>
+        <button type="button" class="publications__filter publications__filter--lean" data-tag="lean"
+          aria-pressed="false">
+          Lean
+        </button>
+      </div>
       <div class="publications__container">
         <div class="publications__content">
-          <div class="publications__data">
+          <div class="publications__data" data-tags="preprint lean">
             <div>
               <span class="publications__rounder"></span>
             </div>
             <div class="publications__info">
               <h3 class="publications__title">
-                <a>
+                <a href="./papers/barrel.pdf" download target="_blank">
                   BARReL: A modern backend for Atelier B in Lean
                 </a>
               </h3>
-              <span class="publications__where">Preprint, coming soon!</span>
+              <span class="publications__where">Preprint</span>
               <span class="publications__author">Ghilain Bergeron, Vincent Trélat</span>
             </div>
           </div>
-          <div class="publications__data">
+          <div class="publications__data" data-tags="preprint lean">
             <div>
               <span class="publications__rounder"></span>
             </div>
             <div class="publications__info">
               <h3 class="publications__title">
-                <a>
+                <a href="./papers/zflean.pdf" download target="_blank">
                   ZFLean: a framework for set-level mathematics in Lean
                 </a>
               </h3>
-              <span class="publications__where">Preprint, coming soon!</span>
+              <span class="publications__where">Preprint</span>
               <span class="publications__author">Vincent Trélat</span>
             </div>
           </div>
-          <div class="publications__data">
+          <div class="publications__data" data-tags="conference lean">
             <div>
               <span class="publications__rounder"></span>
             </div>
@@ -311,7 +329,7 @@
               <span class="publications__author">Vincent Trélat</span>
             </div>
           </div>
-          <div class="publications__data">
+          <div class="publications__data" data-tags="conference lean">
             <div>
               <span class="publications__rounder"></span>
             </div>
@@ -328,7 +346,7 @@
               <span class="publications__author">Vincent Trélat</span>
             </div>
           </div>
-          <div class="publications__data">
+          <div class="publications__data" data-tags="conference">
             <div>
               <span class="publications__rounder"></span>
             </div>
@@ -342,7 +360,7 @@
               <span class="publications__author">Vincent Trélat</span>
             </div>
           </div>
-          <div class="publications__data">
+          <div class="publications__data" data-tags="isabelle">
             <div>
               <span class="publications__rounder"></span>
             </div>
@@ -356,7 +374,7 @@
               <span class="publications__author">Vincent Trélat</span>
             </div>
           </div>
-          <div class="publications__data">
+          <div class="publications__data" data-tags="isabelle">
             <div>
               <span class="publications__rounder"></span>
             </div>
