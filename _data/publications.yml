@@ -11,11 +11,11 @@
 #   award    (optional) — short award label, e.g. "🏆 Best Paper"
 # ──────────────────────────────────────────────────────────────────────────────
 
-- title: "BARReL: A Modern Backend for Atelier B in Lean"
+- title: "BARReL: un backend moderne pour Atelier B dans Lean"
   authors: "Ghilain Bergeron, Vincent Trélat"
   venue: "AFADL 2026"
   tags: [conference, lean]
-  pdf: ./papers/barrel.pdf
+  pdf: ./papers/afadl26.pdf
 
 - title: "BARReL: A Modern Backend for Atelier B in Lean"
   authors: "Ghilain Bergeron, Vincent Trélat"
@@ -23,11 +23,12 @@
   tags: [preprint, lean]
   pdf: ./papers/barrel.pdf
 
-- title: "Formalizing Zermelo–Fraenkel Set Theory in Lean 4"
+- title: "ZFLean: a framework for set-level mathematics in Lean"
   authors: "Vincent Trélat"
-  venue: "Preprint"
+  venue: "Preprint, 2026"
   tags: [preprint, lean]
   pdf: ./papers/zflean.pdf
+  doi: 10.48550/arXiv.2604.24195
 
 - title: "Brewing the Soundness of BEer"
   authors: "Vincent Trélat"
@@ -41,6 +42,7 @@
   tags: [conference]
   pdf: ./papers/abz25.pdf
   award: "🏆 Best Paper"
+  doi: 10.1007/978-3-031-94533-5_4
 
 - title: "Amélioration des raisonneurs du langage B avec des techniques SMT"
   authors: "Vincent Trélat"
@@ -55,7 +57,7 @@
   url: "https://www.isa-afp.org/entries/Substitutions_Lambda_Free.html"
 
 - title: "Correctness of a Set-based Algorithm for Computing Strongly Connected Components of a Graph"
-  authors: "Vincent Trélat, Stephan Merz"
+  authors: "Stephan Merz, Vincent Trélat"
   venue: "Archive of Formal Proofs, 2022"
   tags: [isabelle]
   url: "https://www.isa-afp.org/entries/SCC_Bloemen_Sequential.html"
