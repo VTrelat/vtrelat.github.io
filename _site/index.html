@@ -1,6 +1,3 @@
----
-layout: null
----
 <!DOCTYPE html>
 <html lang="en">
 
@@ -137,13 +134,11 @@ layout: null
       <div class="container">
         <h2 class="section__title">Pinned Projects</h2>
         <p class="section__subtitle">Selected GitHub repositories</p>
-        {% assign repo_slugs = site.data.projects | map: "slug" | join: ", " %}
-        {% assign projects_with_covers = site.data.projects | where_exp: "p", "p.cover != nil" %}
-        {% capture covers_json %}{
-        {% for p in projects_with_covers %}"{{ p.slug }}": "{{ p.cover }}"{% unless forloop.last %},{% endunless %}
-        {% endfor %}}{% endcapture %}
-        <div class="project-grid" id="project-grid" data-repos="{{ repo_slugs }}"
-          data-covers='{{ covers_json | strip_newlines | strip }}'>
+        
+        
+        
+        <div class="project-grid" id="project-grid" data-repos="VTrelat/BEer, VTrelat/BARReL, VTrelat/ZFLean, VTrelat/noctis-lux-theme, VTrelat/Heron"
+          data-covers='{        "VTrelat/BEer": "assets/img/BEer_og.jpg",        "VTrelat/BARReL": "assets/img/BARReL_og.jpg",        "VTrelat/ZFLean": "assets/img/ZFLean_og.png",        "VTrelat/noctis-lux-theme": "assets/img/noctis_og.png",        "VTrelat/Heron": "assets/img/heron_og.jpg"        }'>
           <noscript>
             <p>Enable JavaScript to load projects.</p>
           </noscript>
@@ -221,41 +216,189 @@ layout: null
 
         <div class="pub-view pub-view--cards" id="pub-view">
 
-          {% for pub in site.data.publications %}
-          {% assign tag_str = pub.tags | join: " " %}
-          <article class="pub" data-tags="{{ tag_str }}">
+          
+          
+          <article class="pub" data-tags="conference lean">
             <div class="pub__bar"></div>
             <h3 class="pub__title">
-              {% if pub.pdf %}
-              <a href="{{ pub.pdf }}" {% unless pub.pdf contains 'http' %} download{% endunless %} target="_blank"
-                rel="noopener">{{ pub.title }}</a>
-              {% elsif pub.url %}
-              <a href="{{ pub.url }}" target="_blank" rel="noopener">{{ pub.title }}</a>
-              {% else %}
-              {{ pub.title }}
-              {% endif %}
-              {% if pub.award %}<span class="pub__award">{{ pub.award }}</span>{% endif %}
+              
+              <a href="./papers/barrel.pdf"  download target="_blank"
+                rel="noopener">BARReL: A Modern Backend for Atelier B in Lean</a>
+              
+              
             </h3>
-            <p class="pub__meta"><span class="pub__venue">{{ pub.venue }}</span><span class="pub__authors">{{
-                pub.authors }}</span></p>
+            <p class="pub__meta"><span class="pub__venue">AFADL 2026</span><span class="pub__authors">Ghilain Bergeron, Vincent Trélat</span></p>
             <div class="pub__tags">
-              {% for tag in pub.tags %}<span class="pub-tag pub-tag--{{ tag }}">{{ tag | capitalize }}</span>{% endfor
-              %}
+              <span class="pub-tag pub-tag--conference">Conference</span><span class="pub-tag pub-tag--lean">Lean</span>
             </div>
-            {% if pub.pdf or pub.doi %}
+            
             <div class="pub__links">
-              {% if pub.pdf %}<a href="{{ pub.pdf }}" {% unless pub.pdf contains 'http' %} download{% endunless %}
+              <a href="./papers/barrel.pdf"  download
                 target="_blank" rel="noopener" class="pub__link pub__link--pdf">
                 <i class="uil uil-file-alt" aria-hidden="true"></i> PDF
-              </a>{% endif %}
-              {% if pub.doi %}<a href="https://doi.org/{{ pub.doi }}" target="_blank" rel="noopener"
-                class="pub__link pub__link--doi">
-                <i class="uil uil-link" aria-hidden="true"></i> DOI
-              </a>{% endif %}
+              </a>
+              
             </div>
-            {% endif %}
+            
           </article>
-          {% endfor %}
+          
+          
+          <article class="pub" data-tags="preprint lean">
+            <div class="pub__bar"></div>
+            <h3 class="pub__title">
+              
+              <a href="./papers/barrel.pdf"  download target="_blank"
+                rel="noopener">BARReL: A Modern Backend for Atelier B in Lean</a>
+              
+              
+            </h3>
+            <p class="pub__meta"><span class="pub__venue">Preprint, 2026</span><span class="pub__authors">Ghilain Bergeron, Vincent Trélat</span></p>
+            <div class="pub__tags">
+              <span class="pub-tag pub-tag--preprint">Preprint</span><span class="pub-tag pub-tag--lean">Lean</span>
+            </div>
+            
+            <div class="pub__links">
+              <a href="./papers/barrel.pdf"  download
+                target="_blank" rel="noopener" class="pub__link pub__link--pdf">
+                <i class="uil uil-file-alt" aria-hidden="true"></i> PDF
+              </a>
+              
+            </div>
+            
+          </article>
+          
+          
+          <article class="pub" data-tags="preprint lean">
+            <div class="pub__bar"></div>
+            <h3 class="pub__title">
+              
+              <a href="./papers/zflean.pdf"  download target="_blank"
+                rel="noopener">Formalizing Zermelo–Fraenkel Set Theory in Lean 4</a>
+              
+              
+            </h3>
+            <p class="pub__meta"><span class="pub__venue">Preprint</span><span class="pub__authors">Vincent Trélat</span></p>
+            <div class="pub__tags">
+              <span class="pub-tag pub-tag--preprint">Preprint</span><span class="pub-tag pub-tag--lean">Lean</span>
+            </div>
+            
+            <div class="pub__links">
+              <a href="./papers/zflean.pdf"  download
+                target="_blank" rel="noopener" class="pub__link pub__link--pdf">
+                <i class="uil uil-file-alt" aria-hidden="true"></i> PDF
+              </a>
+              
+            </div>
+            
+          </article>
+          
+          
+          <article class="pub" data-tags="conference lean">
+            <div class="pub__bar"></div>
+            <h3 class="pub__title">
+              
+              <a href="./papers/ifm25.pdf"  download target="_blank"
+                rel="noopener">Brewing the Soundness of BEer</a>
+              
+              
+            </h3>
+            <p class="pub__meta"><span class="pub__venue">iFM 2025</span><span class="pub__authors">Vincent Trélat</span></p>
+            <div class="pub__tags">
+              <span class="pub-tag pub-tag--conference">Conference</span><span class="pub-tag pub-tag--lean">Lean</span>
+            </div>
+            
+            <div class="pub__links">
+              <a href="./papers/ifm25.pdf"  download
+                target="_blank" rel="noopener" class="pub__link pub__link--pdf">
+                <i class="uil uil-file-alt" aria-hidden="true"></i> PDF
+              </a>
+              
+            </div>
+            
+          </article>
+          
+          
+          <article class="pub" data-tags="conference">
+            <div class="pub__bar"></div>
+            <h3 class="pub__title">
+              
+              <a href="./papers/abz25.pdf"  download target="_blank"
+                rel="noopener">Safely Encoding B Proof Obligations in SMT-LIB</a>
+              
+              <span class="pub__award">🏆 Best Paper</span>
+            </h3>
+            <p class="pub__meta"><span class="pub__venue">ABZ 2025</span><span class="pub__authors">Vincent Trélat</span></p>
+            <div class="pub__tags">
+              <span class="pub-tag pub-tag--conference">Conference</span>
+            </div>
+            
+            <div class="pub__links">
+              <a href="./papers/abz25.pdf"  download
+                target="_blank" rel="noopener" class="pub__link pub__link--pdf">
+                <i class="uil uil-file-alt" aria-hidden="true"></i> PDF
+              </a>
+              
+            </div>
+            
+          </article>
+          
+          
+          <article class="pub" data-tags="conference">
+            <div class="pub__bar"></div>
+            <h3 class="pub__title">
+              
+              <a href="./papers/afadl24.pdf"  download target="_blank"
+                rel="noopener">Amélioration des raisonneurs du langage B avec des techniques SMT</a>
+              
+              
+            </h3>
+            <p class="pub__meta"><span class="pub__venue">AFADL 2024</span><span class="pub__authors">Vincent Trélat</span></p>
+            <div class="pub__tags">
+              <span class="pub-tag pub-tag--conference">Conference</span>
+            </div>
+            
+            <div class="pub__links">
+              <a href="./papers/afadl24.pdf"  download
+                target="_blank" rel="noopener" class="pub__link pub__link--pdf">
+                <i class="uil uil-file-alt" aria-hidden="true"></i> PDF
+              </a>
+              
+            </div>
+            
+          </article>
+          
+          
+          <article class="pub" data-tags="isabelle">
+            <div class="pub__bar"></div>
+            <h3 class="pub__title">
+              
+              <a href="https://www.isa-afp.org/entries/Substitutions_Lambda_Free.html" target="_blank" rel="noopener">Substitutions for λ-free higher-order terms</a>
+              
+              
+            </h3>
+            <p class="pub__meta"><span class="pub__venue">Archive of Formal Proofs, 2024</span><span class="pub__authors">Vincent Trélat</span></p>
+            <div class="pub__tags">
+              <span class="pub-tag pub-tag--isabelle">Isabelle</span>
+            </div>
+            
+          </article>
+          
+          
+          <article class="pub" data-tags="isabelle">
+            <div class="pub__bar"></div>
+            <h3 class="pub__title">
+              
+              <a href="https://www.isa-afp.org/entries/SCC_Bloemen_Sequential.html" target="_blank" rel="noopener">Correctness of a Set-based Algorithm for Computing Strongly Connected Components of a Graph</a>
+              
+              
+            </h3>
+            <p class="pub__meta"><span class="pub__venue">Archive of Formal Proofs, 2022</span><span class="pub__authors">Vincent Trélat, Stephan Merz</span></p>
+            <div class="pub__tags">
+              <span class="pub-tag pub-tag--isabelle">Isabelle</span>
+            </div>
+            
+          </article>
+          
 
         </div><!-- /pub-view -->
 
@@ -312,35 +455,316 @@ layout: null
 
         <div class="talk-view talk-view--cards" id="talk-view">
 
-          {% for talk in site.data.talks %}
-          {% assign tag_str = talk.tags | join: " " %}
-          <article class="talk" data-tags="{{ tag_str }}">
+          
+          
+          <article class="talk" data-tags="conference">
             <div class="talk__bar"></div>
-            <h3 class="talk__title">{{ talk.title }}</h3>
-            <p class="talk__venue">{{ talk.venue }}</p>
+            <h3 class="talk__title">BARReL: a modern backend for Atelier B in Lean</h3>
+            <p class="talk__venue">AFADL 2026 — GdR SciLog, Lille, France, 2026</p>
             <div class="talk__tags">
-              {% for tag in talk.tags %}<span class="talk-tag talk-tag--{{ tag }}">{{ tag | capitalize }}</span>{%
-              endfor %}
+              <span class="talk-tag talk-tag--conference">Conference</span>
             </div>
-            {% if talk.links %}
+            
             <div class="talk__links">
-              {% for link in talk.links %}
-              {% if link.icon == "external" %}
-              {% assign link_icon = "uil-external-link-alt" %}
-              {% elsif link.icon == "video" %}
-              {% assign link_icon = "uil-youtube" %}
-              {% else %}
-              {% assign link_icon = "uil-files-landscapes" %}
-              {% endif %}
-              <a href="{{ link.url }}" {% unless link.url contains 'http' %} download{% endunless %} target="_blank"
+              
+              
+              <a href="./slides/afadl2026.pdf"  download target="_blank"
                 rel="noopener" class="talk-link">
-                {{ link.label }} <i class="uil {{ link_icon }}" aria-hidden="true"></i>
+                Slides <i class="uil uil-files-landscapes" aria-hidden="true"></i>
               </a>
-              {% endfor %}
+              
             </div>
-            {% endif %}
+            
           </article>
-          {% endfor %}
+          
+          
+          <article class="talk" data-tags="seminar">
+            <div class="talk__bar"></div>
+            <h3 class="talk__title">From Sets to Types: using the B Method with modern proof tools</h3>
+            <p class="talk__venue">UFMG, Belo Horizonte, Brazil, 2026</p>
+            <div class="talk__tags">
+              <span class="talk-tag talk-tag--seminar">Seminar</span>
+            </div>
+            
+            <div class="talk__links">
+              
+              
+              <a href="https://dcc.ufmg.br/palestra-from-sets-to-types-using-the-b-method-with-modern-proof-tools/"  target="_blank"
+                rel="noopener" class="talk-link">
+                Event page <i class="uil uil-external-link-alt" aria-hidden="true"></i>
+              </a>
+              
+              
+              <a href="./slides/ufmg2026.pdf"  download target="_blank"
+                rel="noopener" class="talk-link">
+                Slides <i class="uil uil-files-landscapes" aria-hidden="true"></i>
+              </a>
+              
+            </div>
+            
+          </article>
+          
+          
+          <article class="talk" data-tags="conference">
+            <div class="talk__bar"></div>
+            <h3 class="talk__title">Brewing the Soundness of BEer</h3>
+            <p class="talk__venue">IFM 2025, Paris, France, 2025</p>
+            <div class="talk__tags">
+              <span class="talk-tag talk-tag--conference">Conference</span>
+            </div>
+            
+            <div class="talk__links">
+              
+              
+              <a href="./slides/slides.pdf"  download target="_blank"
+                rel="noopener" class="talk-link">
+                Slides <i class="uil uil-files-landscapes" aria-hidden="true"></i>
+              </a>
+              
+            </div>
+            
+          </article>
+          
+          
+          <article class="talk" data-tags="seminar">
+            <div class="talk__bar"></div>
+            <h3 class="talk__title">Journée du GT LVP du GdR GPL</h3>
+            <p class="talk__venue">Paris, France, 2025</p>
+            <div class="talk__tags">
+              <span class="talk-tag talk-tag--seminar">Seminar</span>
+            </div>
+            
+            <div class="talk__links">
+              
+              
+              <a href="./slides/slides.pdf"  download target="_blank"
+                rel="noopener" class="talk-link">
+                Slides <i class="uil uil-files-landscapes" aria-hidden="true"></i>
+              </a>
+              
+            </div>
+            
+          </article>
+          
+          
+          <article class="talk" data-tags="workshop">
+            <div class="talk__bar"></div>
+            <h3 class="talk__title">EuroProofNet: Workshop on Automated Reasoning and Proof Logging</h3>
+            <p class="talk__venue">Paris, France, 2025</p>
+            <div class="talk__tags">
+              <span class="talk-tag talk-tag--workshop">Workshop</span>
+            </div>
+            
+            <div class="talk__links">
+              
+              
+              <a href="https://www.youtube.com/watch?v=jhePtxcuHvk&t=277s"  target="_blank"
+                rel="noopener" class="talk-link">
+                Talk <i class="uil uil-youtube" aria-hidden="true"></i>
+              </a>
+              
+              
+              <a href="./slides/epn2025.pdf"  download target="_blank"
+                rel="noopener" class="talk-link">
+                Slides <i class="uil uil-files-landscapes" aria-hidden="true"></i>
+              </a>
+              
+            </div>
+            
+          </article>
+          
+          
+          <article class="talk" data-tags="seminar">
+            <div class="talk__bar"></div>
+            <h3 class="talk__title">BLaSST Meeting</h3>
+            <p class="talk__venue">Clearsy, Paris, France, 2025</p>
+            <div class="talk__tags">
+              <span class="talk-tag talk-tag--seminar">Seminar</span>
+            </div>
+            
+            <div class="talk__links">
+              
+              
+              <a href="https://anr.fr/Projet-ANR-21-CE25-0010"  target="_blank"
+                rel="noopener" class="talk-link">
+                ANR-21-CE25-0010 <i class="uil uil-external-link-alt" aria-hidden="true"></i>
+              </a>
+              
+              
+              <a href="./slides/slides.pdf"  download target="_blank"
+                rel="noopener" class="talk-link">
+                Slides <i class="uil uil-files-landscapes" aria-hidden="true"></i>
+              </a>
+              
+            </div>
+            
+          </article>
+          
+          
+          <article class="talk" data-tags="conference award">
+            <div class="talk__bar"></div>
+            <h3 class="talk__title">ABZ: Safely Encoding B Proof Obligations in SMT-LIB</h3>
+            <p class="talk__venue">Düsseldorf, Germany, 2025</p>
+            <div class="talk__tags">
+              <span class="talk-tag talk-tag--conference">Conference</span><span class="talk-tag talk-tag--award">Award</span>
+            </div>
+            
+            <div class="talk__links">
+              
+              
+              <a href="./slides/slides.pdf"  download target="_blank"
+                rel="noopener" class="talk-link">
+                Slides <i class="uil uil-files-landscapes" aria-hidden="true"></i>
+              </a>
+              
+            </div>
+            
+          </article>
+          
+          
+          <article class="talk" data-tags="seminar">
+            <div class="talk__bar"></div>
+            <h3 class="talk__title">ICSPA Meeting</h3>
+            <p class="talk__venue">Paris, France, 2025</p>
+            <div class="talk__tags">
+              <span class="talk-tag talk-tag--seminar">Seminar</span>
+            </div>
+            
+            <div class="talk__links">
+              
+              
+              <a href="https://anr.fr/Projet-ANR-21-CE25-0015"  target="_blank"
+                rel="noopener" class="talk-link">
+                ANR-21-CE25-0015 <i class="uil uil-external-link-alt" aria-hidden="true"></i>
+              </a>
+              
+              
+              <a href="./slides/veridis2024.pdf"  download target="_blank"
+                rel="noopener" class="talk-link">
+                Slides <i class="uil uil-files-landscapes" aria-hidden="true"></i>
+              </a>
+              
+            </div>
+            
+          </article>
+          
+          
+          <article class="talk" data-tags="seminar">
+            <div class="talk__bar"></div>
+            <h3 class="talk__title">Journée du GT LVP du GdR GPL</h3>
+            <p class="talk__venue">Paris, France, 2024</p>
+            <div class="talk__tags">
+              <span class="talk-tag talk-tag--seminar">Seminar</span>
+            </div>
+            
+            <div class="talk__links">
+              
+              
+              <a href="./slides/veridis2024.pdf"  download target="_blank"
+                rel="noopener" class="talk-link">
+                Slides <i class="uil uil-files-landscapes" aria-hidden="true"></i>
+              </a>
+              
+            </div>
+            
+          </article>
+          
+          
+          <article class="talk" data-tags="symposium">
+            <div class="talk__bar"></div>
+            <h3 class="talk__title">VINO</h3>
+            <p class="talk__venue">Campo Tures, Italy, 2024</p>
+            <div class="talk__tags">
+              <span class="talk-tag talk-tag--symposium">Symposium</span>
+            </div>
+            
+            <div class="talk__links">
+              
+              
+              <a href="./slides/comp_verif.pdf"  download target="_blank"
+                rel="noopener" class="talk-link">
+                Chapter <i class="uil uil-files-landscapes" aria-hidden="true"></i>
+              </a>
+              
+              
+              <a href="./slides/veridis2024.pdf"  download target="_blank"
+                rel="noopener" class="talk-link">
+                Slides <i class="uil uil-files-landscapes" aria-hidden="true"></i>
+              </a>
+              
+            </div>
+            
+          </article>
+          
+          
+          <article class="talk" data-tags="seminar">
+            <div class="talk__bar"></div>
+            <h3 class="talk__title">VeriDis Retreat</h3>
+            <p class="talk__venue">Liège, Belgium, 2024</p>
+            <div class="talk__tags">
+              <span class="talk-tag talk-tag--seminar">Seminar</span>
+            </div>
+            
+            <div class="talk__links">
+              
+              
+              <a href="./slides/veridis2024.pdf"  download target="_blank"
+                rel="noopener" class="talk-link">
+                Slides <i class="uil uil-files-landscapes" aria-hidden="true"></i>
+              </a>
+              
+            </div>
+            
+          </article>
+          
+          
+          <article class="talk" data-tags="conference">
+            <div class="talk__bar"></div>
+            <h3 class="talk__title">AFADL: Enhancing B Language Reasoners with SMT Techniques</h3>
+            <p class="talk__venue">Strasbourg, France, 2024</p>
+            <div class="talk__tags">
+              <span class="talk-tag talk-tag--conference">Conference</span>
+            </div>
+            
+            <div class="talk__links">
+              
+              
+              <a href="./slides/afadl2024.pdf"  download target="_blank"
+                rel="noopener" class="talk-link">
+                Slides <i class="uil uil-files-landscapes" aria-hidden="true"></i>
+              </a>
+              
+            </div>
+            
+          </article>
+          
+          
+          <article class="talk" data-tags="seminar">
+            <div class="talk__bar"></div>
+            <h3 class="talk__title">BLaSST Meeting</h3>
+            <p class="talk__venue">Clearsy, Paris, France, 2024</p>
+            <div class="talk__tags">
+              <span class="talk-tag talk-tag--seminar">Seminar</span>
+            </div>
+            
+            <div class="talk__links">
+              
+              
+              <a href="https://anr.fr/Projet-ANR-21-CE25-0010"  target="_blank"
+                rel="noopener" class="talk-link">
+                ANR-21-CE25-0010 <i class="uil uil-external-link-alt" aria-hidden="true"></i>
+              </a>
+              
+              
+              <a href="./slides/blasst2024.pdf"  download target="_blank"
+                rel="noopener" class="talk-link">
+                Slides <i class="uil uil-files-landscapes" aria-hidden="true"></i>
+              </a>
+              
+            </div>
+            
+          </article>
+          
 
         </div><!-- /talk-view -->
 

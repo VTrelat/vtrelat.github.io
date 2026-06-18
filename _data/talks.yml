@@ -1,0 +1,131 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# Talks data
+# Each entry can have:
+#   title   (required)
+#   venue   (required) — full venue string incl. city and year
+#   tags    (required) — list from: seminar, workshop, conference, symposium, award
+#   links   (optional) — list of {label, url, icon}
+#     icon values: slides | external | video
+# ──────────────────────────────────────────────────────────────────────────────
+
+- title: "BARReL: a modern backend for Atelier B in Lean"
+  venue: "AFADL 2026 — GdR SciLog, Lille, France, 2026"
+  tags: [conference]
+  links:
+    - label: Slides
+      url: ./slides/afadl2026.pdf
+      icon: slides
+
+- title: "From Sets to Types: using the B Method with modern proof tools"
+  venue: "UFMG, Belo Horizonte, Brazil, 2026"
+  tags: [seminar]
+  links:
+    - label: Event page
+      url: "https://dcc.ufmg.br/palestra-from-sets-to-types-using-the-b-method-with-modern-proof-tools/"
+      icon: external
+    - label: Slides
+      url: ./slides/ufmg2026.pdf
+      icon: slides
+
+- title: "Brewing the Soundness of BEer"
+  venue: "IFM 2025, Paris, France, 2025"
+  tags: [conference]
+  links:
+    - label: Slides
+      url: ./slides/slides.pdf
+      icon: slides
+
+- title: "Journée du GT LVP du GdR GPL"
+  venue: "Paris, France, 2025"
+  tags: [seminar]
+  links:
+    - label: Slides
+      url: ./slides/slides.pdf
+      icon: slides
+
+- title: "EuroProofNet: Workshop on Automated Reasoning and Proof Logging"
+  venue: "Paris, France, 2025"
+  tags: [workshop]
+  links:
+    - label: Talk
+      url: "https://www.youtube.com/watch?v=jhePtxcuHvk&t=277s"
+      icon: video
+    - label: Slides
+      url: ./slides/epn2025.pdf
+      icon: slides
+
+- title: "BLaSST Meeting"
+  venue: "Clearsy, Paris, France, 2025"
+  tags: [seminar]
+  links:
+    - label: ANR-21-CE25-0010
+      url: "https://anr.fr/Projet-ANR-21-CE25-0010"
+      icon: external
+    - label: Slides
+      url: ./slides/slides.pdf
+      icon: slides
+
+- title: "ABZ: Safely Encoding B Proof Obligations in SMT-LIB"
+  venue: "Düsseldorf, Germany, 2025"
+  tags: [conference, award]
+  links:
+    - label: Slides
+      url: ./slides/slides.pdf
+      icon: slides
+
+- title: "ICSPA Meeting"
+  venue: "Paris, France, 2025"
+  tags: [seminar]
+  links:
+    - label: ANR-21-CE25-0015
+      url: "https://anr.fr/Projet-ANR-21-CE25-0015"
+      icon: external
+    - label: Slides
+      url: ./slides/veridis2024.pdf
+      icon: slides
+
+- title: "Journée du GT LVP du GdR GPL"
+  venue: "Paris, France, 2024"
+  tags: [seminar]
+  links:
+    - label: Slides
+      url: ./slides/veridis2024.pdf
+      icon: slides
+
+- title: "VINO"
+  venue: "Campo Tures, Italy, 2024"
+  tags: [symposium]
+  links:
+    - label: Chapter
+      url: ./slides/comp_verif.pdf
+      icon: slides
+    - label: Slides
+      url: ./slides/veridis2024.pdf
+      icon: slides
+
+- title: "VeriDis Retreat"
+  venue: "Liège, Belgium, 2024"
+  tags: [seminar]
+  links:
+    - label: Slides
+      url: ./slides/veridis2024.pdf
+      icon: slides
+
+- title: "AFADL: Enhancing B Language Reasoners with SMT Techniques"
+  venue: "Strasbourg, France, 2024"
+  tags: [conference]
+  links:
+    - label: Slides
+      url: ./slides/afadl2024.pdf
+      icon: slides
+
+- title: "BLaSST Meeting"
+  venue: "Clearsy, Paris, France, 2024"
+  tags: [seminar]
+  links:
+    - label: ANR-21-CE25-0010
+      url: "https://anr.fr/Projet-ANR-21-CE25-0010"
+      icon: external
+    - label: Slides
+      url: ./slides/blasst2024.pdf
+      icon: slides

@@ -1,0 +1,61 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# Publications data
+# Each entry can have:
+#   title    (required)
+#   authors  (required)
+#   venue    (required)
+#   tags     (required) — list from: conference, preprint, lean, isabelle
+#   pdf      (optional) — relative path (./papers/…) or absolute URL
+#   doi      (optional) — DOI string only, e.g. 10.1007/978-3-031-…
+#   url      (optional) — fallback link when no pdf/doi (e.g. AFP entry)
+#   award    (optional) — short award label, e.g. "🏆 Best Paper"
+# ──────────────────────────────────────────────────────────────────────────────
+
+- title: "BARReL: A Modern Backend for Atelier B in Lean"
+  authors: "Ghilain Bergeron, Vincent Trélat"
+  venue: "AFADL 2026"
+  tags: [conference, lean]
+  pdf: ./papers/barrel.pdf
+
+- title: "BARReL: A Modern Backend for Atelier B in Lean"
+  authors: "Ghilain Bergeron, Vincent Trélat"
+  venue: "Preprint, 2026"
+  tags: [preprint, lean]
+  pdf: ./papers/barrel.pdf
+
+- title: "Formalizing Zermelo–Fraenkel Set Theory in Lean 4"
+  authors: "Vincent Trélat"
+  venue: "Preprint"
+  tags: [preprint, lean]
+  pdf: ./papers/zflean.pdf
+
+- title: "Brewing the Soundness of BEer"
+  authors: "Vincent Trélat"
+  venue: "iFM 2025"
+  tags: [conference, lean]
+  pdf: ./papers/ifm25.pdf
+
+- title: "Safely Encoding B Proof Obligations in SMT-LIB"
+  authors: "Vincent Trélat"
+  venue: "ABZ 2025"
+  tags: [conference]
+  pdf: ./papers/abz25.pdf
+  award: "🏆 Best Paper"
+
+- title: "Amélioration des raisonneurs du langage B avec des techniques SMT"
+  authors: "Vincent Trélat"
+  venue: "AFADL 2024"
+  tags: [conference]
+  pdf: ./papers/afadl24.pdf
+
+- title: "Substitutions for λ-free higher-order terms"
+  authors: "Vincent Trélat"
+  venue: "Archive of Formal Proofs, 2024"
+  tags: [isabelle]
+  url: "https://www.isa-afp.org/entries/Substitutions_Lambda_Free.html"
+
+- title: "Correctness of a Set-based Algorithm for Computing Strongly Connected Components of a Graph"
+  authors: "Vincent Trélat, Stephan Merz"
+  venue: "Archive of Formal Proofs, 2022"
+  tags: [isabelle]
+  url: "https://www.isa-afp.org/entries/SCC_Bloemen_Sequential.html"

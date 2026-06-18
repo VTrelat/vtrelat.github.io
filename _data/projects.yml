@@ -1,0 +1,22 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# Pinned GitHub projects
+# Each entry:
+#   slug   (required) — "Owner/repo" GitHub slug
+#   cover  (optional) — local image path relative to site root
+#                       falls back to GitHub's OpenGraph image
+# ──────────────────────────────────────────────────────────────────────────────
+
+- slug: VTrelat/BEer
+  cover: assets/img/BEer_og.jpg
+
+- slug: VTrelat/BARReL
+  cover: assets/img/BARReL_og.jpg
+
+- slug: VTrelat/ZFLean
+  cover: assets/img/ZFLean_og.png
+
+- slug: VTrelat/noctis-lux-theme
+  cover: assets/img/noctis_og.png
+
+- slug: VTrelat/Heron
+  cover: assets/img/heron_og.jpg

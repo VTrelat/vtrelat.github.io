@@ -1,0 +1,25 @@
+title: Vincent Trélat
+description: >
+  Ph.D. student at Inria (LORIA, Nancy). Logic, formal methods, theorem proving,
+  set theory, automated reasoning.
+url: "https://vtrelat.github.io"
+baseurl: ""
+
+author:
+  name: Vincent Trélat
+  email: vincent.trelat@inria.fr
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+# Exclude from build
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+plugins:
+  - jekyll-seo-tag
