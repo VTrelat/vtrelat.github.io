@@ -16,6 +16,7 @@
   venue: "AFADL 2026"
   tags: [conference, lean]
   pdf: ./papers/afadl26.pdf
+  doi: 10.48550/arXiv.2606.20121
 
 - title: "BARReL: A Modern Backend for Atelier B in Lean"
   authors: "Ghilain Bergeron, Vincent Trélat"
