@@ -1,0 +1,486 @@
+/*==============================================================================
+  NEWS SPOTLIGHT
+  Hovering the News section turns the page into a stage: the page shades to
+  near-black, three lamps drop in one after the other, and the News section is
+  lifted into the light. After they settle, the lamps slowly traverse the
+  section and cross over one another.
+
+  Layers, by z-index:
+    200  .ns-shade   the shade over the page
+    210  #news       the section, lifted above the shade
+    215  .ns-glow    real illumination (brightness pass) on the lit section
+    220  .ns-lights  the lamps: cones, filaments, heads, spill pools
+
+  Markup is injected by assets/js/news-spotlight.js — nothing to add to the
+  page itself.
+==============================================================================*/
+
+/* geometry + timing; the JS overrides these on :root while active */
+html {
+  --ns-spot-x: 50vw;
+  --ns-spot-y: 55vh;
+  --ns-pw: 420px;        /* pool width  (set from the section width) */
+  --ns-ph: 190px;        /* pool height (set from the section height) */
+  --ns-spread: 280px;    /* lateral offset of the outer two lamps */
+  --ns-stagger: 0.34s;   /* gap between ignitions */
+  --ns-gain: 0.8;        /* overall beam brightness */
+  --ns-lift: 2;          /* how hard the landing brightens the page */
+  --ns-shade: 0.92;      /* how dark the page goes */
+}
+
+/*---------------------------------------------------------------- the shade */
+.ns-shade {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 45%, rgb(7, 9, 14) 0%, rgb(3, 4, 7) 70%);
+  opacity: 0;
+  transition: opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.ns-on .ns-shade {
+  opacity: var(--ns-shade);
+  transition-duration: 0.5s;
+}
+
+/*----------------------------------------------------------------- the rig */
+.ns-lights {
+  position: fixed;
+  inset: 0;
+  z-index: 220;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+}
+
+body.ns-on .ns-lights {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease;
+}
+
+/* One lamp = the pivot. Its apex sits above the viewport, its bottom edge on
+   the page plane, so rotating it sweeps the light across the section. */
+.ns-lamp {
+  --lx: 0px;             /* horizontal offset from the section centre */
+  --bw: 16rem;           /* cone width at the page plane */
+  --tilt: 0deg;          /* resting angle */
+  --swing: -10deg;       /* angle it swings in from */
+  --peak: 1;             /* held brightness */
+  --d: 0s;               /* ignition delay */
+  --ps: 1;               /* pool height scale */
+  --psx: 1;              /* pool width scale */
+  --H: calc(var(--ns-spot-y) + 4rem);   /* throw distance, apex to plane */
+  position: absolute;
+  top: -4rem;
+  left: calc(var(--ns-spot-x) + var(--lx));
+  width: var(--bw);
+  height: calc(var(--ns-spot-y) + 4rem);
+  transform-origin: 50% 0;
+  transform: translateX(-50%) rotate(var(--swing));
+  opacity: 0;
+  mix-blend-mode: screen;
+  will-change: opacity, transform;
+}
+
+/* strike + settle, then the slow idle traverse and brightness breathe */
+body.ns-on .ns-lamp {
+  animation:
+    ns-strike 1.15s ease-out var(--d) both,
+    ns-swing 1.7s cubic-bezier(0.14, 0.7, 0.18, 1) var(--d) both,
+    ns-breathe var(--bdur) ease-in-out calc(var(--d) + 1.7s) infinite,
+    ns-sway var(--sdur) ease-in-out calc(var(--d) + 1.7s) infinite;
+}
+
+/* the three lamps: left normal, centre larger, right thinner */
+.ns-lamp--1, .ns-spot--1 {
+  --lx: calc(var(--ns-spread) * -1);
+  --bw: 27rem;
+  --tilt: -5.5deg;
+  --swing: 14deg;
+  --peak: calc(0.78 * var(--ns-gain));
+  --ps: 0.9;
+  --psx: 1.22;
+  --d: 0s;
+  --sdur: 24s;
+  --bdur: 7.5s;
+  --sw1: 11deg;
+  --sw2: -6.5deg;
+}
+
+.ns-lamp--2, .ns-spot--2 {
+  --lx: calc(var(--ns-spread) * 0.1);
+  --bw: 31rem;
+  --tilt: 0.8deg;
+  --swing: -11deg;
+  --peak: calc(1 * var(--ns-gain));
+  --ps: 1.05;
+  --psx: 1.42;
+  --d: calc(var(--ns-stagger) * 1.3);
+  --sdur: 31s;
+  --bdur: 9.5s;
+  --sw1: -8deg;
+  --sw2: 9.5deg;
+}
+
+.ns-lamp--3, .ns-spot--3 {
+  --lx: calc(var(--ns-spread) * 1.05);
+  --bw: 24rem;
+  --tilt: 6deg;
+  --swing: 9deg;
+  --peak: calc(0.7 * var(--ns-gain));
+  --ps: 0.84;
+  --psx: 1.08;
+  --d: calc(var(--ns-stagger) * 2.5);
+  --sdur: 27s;
+  --bdur: 6.5s;
+  --sw1: -12deg;
+  --sw2: 6deg;
+}
+
+/* Wide penumbra — most of the cone volume. The lateral mask is a fixed width
+   while the cone widens with depth, so its edges dissolve with distance. */
+.ns-ray {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(46.5% 0, 53.5% 0, 122% 100%, -22% 100%);
+  background: linear-gradient(180deg,
+    rgba(255, 250, 232, 0) 0%,
+    rgba(255, 249, 226, 0.07) 22%,
+    rgba(255, 246, 214, 0.17) 58%,
+    rgba(255, 242, 200, 0.1) 84%,
+    rgba(255, 240, 196, 0) 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.12) 16%, rgba(0, 0, 0, 0.45) 32%, #000 48%, #000 52%, rgba(0, 0, 0, 0.45) 68%, rgba(0, 0, 0, 0.12) 84%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.12) 16%, rgba(0, 0, 0, 0.45) 32%, #000 48%, #000 52%, rgba(0, 0, 0, 0.45) 68%, rgba(0, 0, 0, 0.12) 84%, transparent 100%);
+  filter: blur(16px);
+}
+
+/* bright core */
+.ns-ray--core {
+  clip-path: polygon(48.6% 0, 51.4% 0, 76% 100%, 24% 100%);
+  background: linear-gradient(180deg,
+    rgba(255, 253, 244, 0) 0%,
+    rgba(255, 253, 244, 0.2) 18%,
+    rgba(255, 251, 234, 0.52) 62%,
+    rgba(255, 248, 222, 0.42) 92%,
+    rgba(255, 246, 214, 0) 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 6%, rgba(0, 0, 0, 0.55) 26%, #000 46%, #000 54%, rgba(0, 0, 0, 0.55) 74%, transparent 94%);
+  mask-image: linear-gradient(90deg, transparent 6%, rgba(0, 0, 0, 0.55) 26%, #000 46%, #000 54%, rgba(0, 0, 0, 0.55) 74%, transparent 94%);
+  filter: blur(6px);
+}
+
+/* uneven interior: brighter filaments of varying width, blurred so they read
+   as denser air inside the cone rather than stripes */
+.ns-ray--streaks {
+  clip-path: polygon(47.4% 0, 52.6% 0, 104% 100%, -4% 100%);
+  background: repeating-linear-gradient(94deg,
+    rgba(255, 255, 255, 0) 0px,
+    rgba(255, 255, 255, 0.05) 9px,
+    rgba(255, 255, 255, 0) 17px,
+    rgba(255, 255, 255, 0.02) 28px,
+    rgba(255, 255, 255, 0) 39px,
+    rgba(255, 255, 255, 0.075) 46px,
+    rgba(255, 255, 255, 0) 58px,
+    rgba(255, 255, 255, 0.015) 74px,
+    rgba(255, 255, 255, 0) 92px);
+  -webkit-mask-image: linear-gradient(180deg, transparent 2%, #000 26%, rgba(0, 0, 0, 0.5) 72%, transparent 96%);
+  mask-image: linear-gradient(180deg, transparent 2%, #000 26%, rgba(0, 0, 0, 0.5) 72%, transparent 96%);
+  filter: blur(9px);
+  opacity: 0.75;
+}
+
+body.ns-on .ns-ray--streaks {
+  animation: ns-filament 14s ease-in-out var(--d) infinite;
+}
+
+/* faint dust drift so a lit beam never sits perfectly still */
+.ns-ray--dust {
+  clip-path: polygon(47% 0, 53% 0, 116% 100%, -16% 100%);
+  background: linear-gradient(96deg, transparent 30%, rgba(255, 255, 255, 0.09) 50%, transparent 70%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 4%, #000 30%, rgba(0, 0, 0, 0.5) 76%, transparent 96%);
+  mask-image: linear-gradient(180deg, transparent 4%, #000 30%, rgba(0, 0, 0, 0.5) 76%, transparent 96%);
+  filter: blur(13px);
+  opacity: 0.6;
+}
+
+body.ns-on .ns-ray--dust {
+  animation: ns-drift 8s ease-in-out var(--d) infinite;
+}
+
+/* lamp head glow at the apex */
+.ns-head {
+  position: absolute;
+  top: 0.4rem;
+  left: 50%;
+  width: 4.5rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side ellipse, rgba(255, 252, 238, 0.5), rgba(255, 246, 214, 0.18) 56%, transparent 82%);
+  filter: blur(8px);
+}
+
+/* Warm spill where the cone meets the page. It is pushed H/cos θ down the
+   lamp axis so its screen depth stays constant (only x = H·tan θ moves), then
+   counter-rotated so the patch itself stays level — like a lit patch on a
+   floor, not water in a tilted glass. */
+.ns-pool {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: calc(var(--ns-pw) * var(--psx));
+  height: calc(var(--ns-ph) * var(--ps));
+  transform:
+    translate(-50%, -50%)
+    translateY(calc(var(--H) / cos(var(--swing)) - var(--H)))
+    rotate(calc(var(--swing) * -1));
+  border-radius: 50%;
+  background: radial-gradient(closest-side ellipse,
+    rgba(255, 251, 232, 0.44) 0%,
+    rgba(255, 248, 220, 0.28) 28%,
+    rgba(255, 244, 206, 0.12) 52%,
+    rgba(255, 241, 198, 0.05) 72%,
+    rgba(255, 240, 196, 0.01) 88%,
+    transparent 100%);
+  filter: blur(12px);
+}
+
+/* hotspot — the small, genuinely bright centre */
+.ns-pool::before {
+  content: '';
+  position: absolute;
+  inset: 24% 30%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side ellipse,
+    rgba(255, 253, 242, 0.5) 0%,
+    rgba(255, 250, 228, 0.3) 42%,
+    rgba(255, 246, 214, 0.12) 70%,
+    transparent 100%);
+  filter: blur(6px);
+}
+
+/* penumbra ring — gives the pool an edge instead of dissolving evenly */
+.ns-pool::after {
+  content: '';
+  position: absolute;
+  inset: -9%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side ellipse,
+    transparent 48%,
+    rgba(255, 246, 214, 0.13) 66%,
+    rgba(255, 241, 198, 0.04) 84%,
+    transparent 100%);
+  filter: blur(14px);
+}
+
+body.ns-on .ns-pool {
+  animation:
+    ns-level 1.7s cubic-bezier(0.14, 0.7, 0.18, 1) var(--d) both,
+    ns-pool-sway var(--sdur) ease-in-out calc(var(--d) + 1.7s) infinite;
+}
+
+/*------------------------------------------- real illumination on the page */
+/* Sits above the shade AND above the lit section, so brightness() lifts the
+   actual pixels underneath instead of laying colour over them. Uses the same
+   x = H·tan θ projection and the same timings as the lamps, so it tracks the
+   drop and the traverse exactly. */
+.ns-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 215;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ns-spot {
+  --H: calc(var(--ns-spot-y) + 4rem);
+  position: absolute;
+  left: calc(var(--ns-spot-x) + var(--lx));
+  top: var(--ns-spot-y);
+  width: calc(var(--ns-pw) * var(--psx) * 0.92);
+  height: calc(var(--ns-ph) * var(--ps) * 0.92);
+  transform: translate(-50%, -50%) translateX(calc(var(--H) * tan(var(--swing))));
+  border-radius: 50%;
+  -webkit-backdrop-filter: brightness(var(--ns-lift)) saturate(1.12);
+  backdrop-filter: brightness(var(--ns-lift)) saturate(1.12);
+  -webkit-mask-image: radial-gradient(closest-side ellipse, #000 0%, rgba(0, 0, 0, 0.92) 34%, rgba(0, 0, 0, 0.55) 58%, rgba(0, 0, 0, 0.18) 78%, transparent 100%);
+  mask-image: radial-gradient(closest-side ellipse, #000 0%, rgba(0, 0, 0, 0.92) 34%, rgba(0, 0, 0, 0.55) 58%, rgba(0, 0, 0, 0.18) 78%, transparent 100%);
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+body.ns-on .ns-spot {
+  animation:
+    ns-strike 1.15s ease-out var(--d) both,
+    ns-spot-drop 1.7s cubic-bezier(0.14, 0.7, 0.18, 1) var(--d) both,
+    ns-breathe var(--bdur) ease-in-out calc(var(--d) + 1.7s) infinite,
+    ns-spot-sway var(--sdur) ease-in-out calc(var(--d) + 1.7s) infinite;
+}
+
+/* it can't live inside a fading layer (that would isolate its own backdrop),
+   so it gets its own fade-out pass */
+body.ns-off .ns-spot {
+  animation: ns-douse 0.45s ease both;
+}
+
+/*-------------------------------------- the News section, lit by the lights */
+body.ns-on #news {
+  z-index: 210;
+}
+
+body.ns-on #news .section__title {
+  color: rgb(255, 251, 236);
+  text-shadow: 0 0 1.6rem rgba(255, 240, 198, 0.5), 0 0 3.5rem rgba(206, 236, 252, 0.3);
+}
+
+body.ns-on #news .section__subtitle { color: rgba(240, 229, 204, 0.72); }
+body.ns-on #news .news__date        { color: rgba(236, 224, 199, 0.66); }
+
+body.ns-on #news .news__text {
+  color: rgb(248, 243, 228);
+  text-shadow: 0 0 1.4rem rgba(255, 243, 208, 0.28);
+}
+
+body.ns-on #news .news__link { color: rgb(255, 247, 220); }
+
+body.ns-on #news .news__badge {
+  color: rgb(255, 247, 220);
+  background: rgba(255, 240, 198, 0.1);
+  border-color: rgba(255, 240, 198, 0.42);
+}
+
+body.ns-on #news .news__item { border-bottom-color: rgba(255, 240, 198, 0.16); }
+
+#news .section__title,
+#news .section__subtitle,
+#news .news__date,
+#news .news__text,
+#news .news__link,
+#news .news__badge,
+#news .news__item {
+  transition: color 0.8s ease 0.3s, background 0.8s ease 0.3s,
+              border-color 0.8s ease 0.3s, text-shadow 0.8s ease 0.3s;
+}
+
+/* #news gets position:relative so the z-index above applies */
+#news { position: relative; }
+
+/*==================== KEYFRAMES ====================*/
+
+/* ignition — a discharge lamp striking: flash, stutter, then hold */
+@keyframes ns-strike {
+  0%   { opacity: 0; }
+  4%   { opacity: calc(var(--peak) * 0.85); }
+  8%   { opacity: calc(var(--peak) * 0.08); }
+  14%  { opacity: calc(var(--peak) * 0.95); }
+  19%  { opacity: calc(var(--peak) * 0.22); }
+  26%  { opacity: calc(var(--peak) * 0.8); }
+  33%  { opacity: calc(var(--peak) * 0.55); }
+  100% { opacity: var(--peak); }
+}
+
+@keyframes ns-douse {
+  from { opacity: var(--peak); }
+  to   { opacity: 0; }
+}
+
+/* the drop: swings in off-axis and settles just past centre */
+@keyframes ns-swing {
+  0%   { transform: translateX(-50%) rotate(var(--swing)); }
+  58%  { transform: translateX(-50%) rotate(calc(var(--tilt) * -1.6)); }
+  100% { transform: translateX(-50%) rotate(var(--tilt)); }
+}
+
+/* the pool during the drop: stays on the page plane and stays level */
+@keyframes ns-level {
+  0% {
+    transform: translate(-50%, -50%)
+      translateY(calc(var(--H) / cos(var(--swing)) - var(--H)))
+      rotate(calc(var(--swing) * -1));
+  }
+  58% {
+    transform: translate(-50%, -50%)
+      translateY(calc(var(--H) / cos(calc(var(--tilt) * -1.6)) - var(--H)))
+      rotate(calc(var(--tilt) * 1.6));
+  }
+  100% {
+    transform: translate(-50%, -50%)
+      translateY(calc(var(--H) / cos(var(--tilt)) - var(--H)))
+      rotate(calc(var(--tilt) * -1));
+  }
+}
+
+/* idle traverse — same axis as the drop, an order of magnitude slower; each
+   lamp has its own period so the three cross over one another */
+@keyframes ns-sway {
+  0%   { transform: translateX(-50%) rotate(var(--tilt)); }
+  28%  { transform: translateX(-50%) rotate(calc(var(--tilt) + var(--sw1))); }
+  64%  { transform: translateX(-50%) rotate(calc(var(--tilt) + var(--sw2))); }
+  100% { transform: translateX(-50%) rotate(var(--tilt)); }
+}
+
+@keyframes ns-pool-sway {
+  0% {
+    transform: translate(-50%, -50%)
+      translateY(calc(var(--H) / cos(var(--tilt)) - var(--H)))
+      rotate(calc(var(--tilt) * -1));
+  }
+  28% {
+    transform: translate(-50%, -50%)
+      translateY(calc(var(--H) / cos(calc(var(--tilt) + var(--sw1))) - var(--H)))
+      rotate(calc((var(--tilt) + var(--sw1)) * -1));
+  }
+  64% {
+    transform: translate(-50%, -50%)
+      translateY(calc(var(--H) / cos(calc(var(--tilt) + var(--sw2))) - var(--H)))
+      rotate(calc((var(--tilt) + var(--sw2)) * -1));
+  }
+  100% {
+    transform: translate(-50%, -50%)
+      translateY(calc(var(--H) / cos(var(--tilt)) - var(--H)))
+      rotate(calc(var(--tilt) * -1));
+  }
+}
+
+@keyframes ns-spot-drop {
+  0%   { transform: translate(-50%, -50%) translateX(calc(var(--H) * tan(var(--swing)))); }
+  58%  { transform: translate(-50%, -50%) translateX(calc(var(--H) * tan(calc(var(--tilt) * -1.6)))); }
+  100% { transform: translate(-50%, -50%) translateX(calc(var(--H) * tan(var(--tilt)))); }
+}
+
+@keyframes ns-spot-sway {
+  0%   { transform: translate(-50%, -50%) translateX(calc(var(--H) * tan(var(--tilt)))); }
+  28%  { transform: translate(-50%, -50%) translateX(calc(var(--H) * tan(calc(var(--tilt) + var(--sw1))))); }
+  64%  { transform: translate(-50%, -50%) translateX(calc(var(--H) * tan(calc(var(--tilt) + var(--sw2))))); }
+  100% { transform: translate(-50%, -50%) translateX(calc(var(--H) * tan(var(--tilt)))); }
+}
+
+/* lamps never hold a perfectly constant output */
+@keyframes ns-breathe {
+  0%   { opacity: var(--peak); }
+  40%  { opacity: calc(var(--peak) * 0.84); }
+  72%  { opacity: calc(var(--peak) * 0.95); }
+  100% { opacity: var(--peak); }
+}
+
+@keyframes ns-filament {
+  0%, 100% { transform: translateX(-2.5%) scaleX(1);    opacity: 0.6; }
+  38%      { transform: translateX(1.5%)  scaleX(1.06); opacity: 0.95; }
+  71%      { transform: translateX(3%)    scaleX(0.97); opacity: 0.7; }
+}
+
+@keyframes ns-drift {
+  0%, 100% { transform: translateX(-5%); opacity: 0.45; }
+  50%      { transform: translateX(5%);  opacity: 0.9; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.ns-on .ns-lamp { animation: ns-strike 0.01s ease-out var(--d) both; }
+  body.ns-on .ns-pool,
+  body.ns-on .ns-ray--dust,
+  body.ns-on .ns-ray--streaks { animation: none; }
+  body.ns-on .ns-spot { animation: ns-strike 0.01s ease-out var(--d) both; }
+}
