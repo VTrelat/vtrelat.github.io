@@ -1,0 +1,10 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# Past students data
+# Each entry:
+#   name (required) — student name
+#   date (required) — e.g. "2025" or "Jul–Aug 2026"
+#   url  (optional) — personal page, LinkedIn, or GitHub
+# ──────────────────────────────────────────────────────────────────────────────
+
+- name: "Matteo Pouillat"
+  date: "Jul–Aug 2026"

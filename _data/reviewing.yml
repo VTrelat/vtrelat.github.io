@@ -1,0 +1,23 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# Reviewing data
+# Each entry:
+#   name  (required) — conference/journal name or acronym
+#   years (required) — list of years reviewed for
+#   url   (optional) — conference/journal website
+# ──────────────────────────────────────────────────────────────────────────────
+
+- name: "LPAR"
+  years: [2026]
+  url: "https://easychair.org/smart-program/LPAR-26/index.html"
+
+- name: "CPP"
+  years: [2026]
+  url: "https://www.sigplan.org/Conferences/CPP/"
+
+- name: "ITP"
+  years: [2025]
+  url: "https://itp-conference.github.io"
+
+- name: "TASE"
+  years: [2024]
+  url: "https://tase2024.github.io"

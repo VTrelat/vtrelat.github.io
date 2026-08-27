@@ -10,6 +10,28 @@ document.querySelectorAll('.nav__link').forEach(link =>
   link.addEventListener('click', () => navMenu.classList.remove('show-menu'))
 );
 
+/* ==================== NEWS: SCROLL-IN ANIMATION ==================== */
+const newsItems = document.querySelectorAll('.news__item');
+if (newsItems.length && 'IntersectionObserver' in window) {
+  newsItems.forEach((item, i) => {
+    item.style.transitionDelay = `${i * 80}ms`;
+    item.classList.add('news__item--hidden');
+  });
+  // Double rAF: guarantees the hidden state actually paints once before the
+  // observer can flip it back — otherwise an item already in view at load
+  // gets hidden+shown in the same frame and the transition never renders.
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const newsObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.remove('news__item--hidden');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.2 });
+    newsItems.forEach(item => newsObserver.observe(item));
+  }));
+}
+
 /* ==================== SCROLL: ACTIVE LINK & HEADER SHADOW ==================== */
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;

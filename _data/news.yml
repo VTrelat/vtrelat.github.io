@@ -1,0 +1,10 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# News data — any order; rendered newest first automatically (sorted by date).
+# Each entry:
+#   date (required) — ISO format "YYYY-MM-DD", used for sorting + the "Upcoming" badge
+#   text (required) — short announcement
+#   url  (optional) — link to more detail
+# ──────────────────────────────────────────────────────────────────────────────
+
+- date: "2026-11-10"
+  text: "PhD defense at Inria Nancy."

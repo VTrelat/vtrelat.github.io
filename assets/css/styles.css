@@ -390,6 +390,52 @@ body.dark-theme .btn--outline {
 
 body.dark-theme .btn--outline:hover { background: rgba(0, 180, 200, 0.1); }
 
+/*==================== NEWS ====================*/
+.news__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.news__item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--border);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.news__item--hidden {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.news__item:last-child { border-bottom: none; }
+
+.news__date {
+  flex: 0 0 7rem;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.news__text { flex: 1 1 60%; }
+
+.news__link { color: var(--accent); margin-left: var(--space-1); }
+.news__link:hover { color: var(--accent-dark); }
+
+.news__badge {
+  display: inline-block;
+  margin-left: var(--space-2);
+  padding: 0.1rem var(--space-2);
+  border-radius: var(--radius-pill);
+  background: rgba(0,153,173,.12);
+  color: var(--accent-dark);
+  border: 1px solid rgba(0,153,173,.35);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  vertical-align: middle;
+}
+
 /*==================== ABOUT ====================*/
 .about__grid {
   display: grid;
@@ -1271,6 +1317,70 @@ body.dark-theme .talk-link:hover { background: rgba(0,153,173,.3); border-color:
 
 .contact__email { color: var(--accent); }
 .contact__email:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+/*==================== REVIEWING ====================*/
+.review-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.review-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-sm);
+  transition: border-color 0.2s;
+}
+
+.review-chip:hover { border-color: var(--accent); }
+
+.review-chip__name {
+  font-weight: 600;
+  color: var(--heading);
+}
+
+a.review-chip__name:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+.review-chip__years {
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+}
+
+/*==================== STUDENTS ====================*/
+.students__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.student {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.student:last-child { border-bottom: none; }
+
+.student__name {
+  font-size: var(--fs-lg);
+  color: var(--heading);
+}
+
+.student__name a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+.student__meta {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
 
 /*==================== FOOTER ====================*/
 .footer {
