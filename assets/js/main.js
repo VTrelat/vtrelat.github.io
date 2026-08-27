@@ -10,6 +10,69 @@ document.querySelectorAll('.nav__link').forEach(link =>
   link.addEventListener('click', () => navMenu.classList.remove('show-menu'))
 );
 
+/* ==================== NEWS: NAV SPOTLIGHT ==================== */
+(() => {
+  const newsLink  = document.querySelector('.nav__link[href="#news"]');
+  const news      = document.getElementById('news');
+  const spotlight = document.getElementById('news-spotlight');
+  const canHover  = window.matchMedia?.('(hover: hover) and (pointer: fine)');
+
+  if (!newsLink || !news || !spotlight) return;
+
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+  const aimAtNews = () => {
+    const container = news.querySelector('.container');
+    const heading   = news.querySelector('.section__title');
+    const list      = news.querySelector('.news__list');
+    if (!container || !heading || !list) return;
+
+    const containerRect = container.getBoundingClientRect();
+    const headingRect   = heading.getBoundingClientRect();
+    const listRect      = list.getBoundingClientRect();
+    const headerHeight  = document.getElementById('header')?.offsetHeight ?? 56;
+
+    // Aim at the upper half of the news list. If that part is off-screen, the
+    // landing point remains around the middle of the viewport so the sweep is
+    // always visible while still lining up with the News section horizontally.
+    const idealY = headingRect.top + Math.min((listRect.bottom - headingRect.top) * 0.44, 190);
+    const x      = clamp(containerRect.left + containerRect.width / 2, 100, innerWidth - 100);
+    const y      = clamp(idealY, Math.max(headerHeight + 130, innerHeight * 0.42), innerHeight * 0.68);
+    const radiusX = clamp(containerRect.width * 0.39, 180, 360);
+    const radiusY = clamp(radiusX * 0.48, 105, 170);
+
+    spotlight.style.setProperty('--spot-x', `${Math.round(x)}px`);
+    spotlight.style.setProperty('--spot-y', `${Math.round(y)}px`);
+    spotlight.style.setProperty('--reveal-x', `${Math.round(radiusX)}px`);
+    spotlight.style.setProperty('--reveal-y', `${Math.round(radiusY)}px`);
+  };
+
+  const showSpotlight = () => {
+    aimAtNews();
+    document.body.classList.add('news-spotlight-active');
+  };
+
+  const hideSpotlight = () => {
+    document.body.classList.remove('news-spotlight-active');
+  };
+
+  newsLink.addEventListener('pointerenter', () => {
+    if (!canHover || canHover.matches) showSpotlight();
+  });
+  newsLink.addEventListener('pointerleave', hideSpotlight);
+  newsLink.addEventListener('focus', () => {
+    if (newsLink.matches(':focus-visible')) showSpotlight();
+  });
+  newsLink.addEventListener('blur', hideSpotlight);
+
+  window.addEventListener('resize', () => {
+    if (document.body.classList.contains('news-spotlight-active')) aimAtNews();
+  });
+  window.addEventListener('scroll', () => {
+    if (document.body.classList.contains('news-spotlight-active')) aimAtNews();
+  }, { passive: true });
+})();
+
 /* ==================== NEWS: SCROLL-IN ANIMATION ==================== */
 const newsItems = document.querySelectorAll('.news__item');
 if (newsItems.length && 'IntersectionObserver' in window) {

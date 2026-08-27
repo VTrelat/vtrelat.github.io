@@ -31,6 +31,17 @@
 
 <body>
 
+  <!--==================== NEWS SPOTLIGHT ====================-->
+  <div class="news-spotlight" id="news-spotlight" aria-hidden="true">
+    <div class="news-spotlight__shade"></div>
+    <div class="news-spotlight__beam news-spotlight__beam--one"></div>
+    <div class="news-spotlight__beam news-spotlight__beam--two"></div>
+    <div class="news-spotlight__beam news-spotlight__beam--three"></div>
+    <div class="news-spotlight__pool news-spotlight__pool--one"></div>
+    <div class="news-spotlight__pool news-spotlight__pool--two"></div>
+    <div class="news-spotlight__pool news-spotlight__pool--three"></div>
+  </div>
+
   <!--==================== HEADER ====================-->
   <header class="header" id="header">
     <nav class="nav container">
@@ -958,6 +969,35 @@
       </div>
     </section>
 
+    <!--==================== STUDENTS ====================-->
+    <!--
+      To add a student: add an entry to _data/students.yml
+        name        — student name
+        affiliation — school / university
+        date        — e.g. "2025" or "Jul–Aug 2026"
+        url         — optional link (personal page, LinkedIn, GitHub)
+    -->
+    <section class="section" id="students">
+      <div class="container">
+        <h2 class="section__title">Past students</h2>
+        <div class="students__list">
+          
+          <div class="student">
+            <div class="student__main">
+              <h3 class="student__name">
+                
+                Matteo Pouillat
+                
+              </h3>
+              <p class="student__affiliation">Telecom Nancy, Université de Lorraine</p>
+            </div>
+            <span class="student__meta">Jul–Aug 2026</span>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
     <!--==================== CONTACT ====================-->
     <section class="section" id="contact">
       <div class="container">
@@ -980,32 +1020,6 @@
                 class="contact__value contact__email">vincent.trelat@depinfonancy.net</a>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!--==================== STUDENTS ====================-->
-    <!--
-      To add a student: add an entry to _data/students.yml
-        name — student name
-        date — e.g. "2025" or "Jul–Aug 2026"
-        url  — optional link (personal page, LinkedIn, GitHub)
-    -->
-    <section class="section" id="students">
-      <div class="container">
-        <h2 class="section__title">Past students</h2>
-        <p class="section__subtitle">Students I've supervised or co-supervised</p>
-        <div class="students__list">
-          
-          <div class="student">
-            <h3 class="student__name">
-              
-              Matteo Pouillat
-              
-            </h3>
-            <span class="student__meta">Jul–Aug 2026</span>
-          </div>
-          
         </div>
       </div>
     </section>
