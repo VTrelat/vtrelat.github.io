@@ -6,6 +6,10 @@
 #   url   (optional) — conference/journal website
 # ──────────────────────────────────────────────────────────────────────────────
 
+- name: "SEFM"
+  years: [2026]
+  url: "https://sefm-conference.github.io/2026/"
+
 - name: "LPAR"
   years: [2026]
   url: "https://easychair.org/smart-program/LPAR-26/index.html"
