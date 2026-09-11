@@ -6,6 +6,10 @@
 #   url   (optional) — conference/journal website
 # ──────────────────────────────────────────────────────────────────────────────
 
+- name: "SCICO"
+  years: [2026]
+  url: "https://www.sciencedirect.com/journal/science-of-computer-programming"
+
 - name: "SEFM"
   years: [2026]
   url: "https://sefm-conference.github.io/2026/"
